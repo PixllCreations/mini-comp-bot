@@ -7,7 +7,7 @@ export default async function updateBubble({
 }: UpdateBubbleProps) {
   try {
     const response = await fetch(
-      "https://thenotwork.org/version-test/api/1.1/obj/DISCORD_POLL_RESPONSES",
+      "https://thenotwork.org/version-test/api/1.1/obj/MINI_COMP_BOT_RESPONSES",
       {
         method: "POST",
         headers: {
