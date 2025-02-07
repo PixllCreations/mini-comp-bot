@@ -79,6 +79,18 @@ const  competitions:  Competition[] = [
 ]
 ```
 
+### A few things to note:
+The `Copmetition.on_____Message:` keys are optional. There are two default messages that the bot will send if you do not include a custom response:
+> onSuccessMessage:  "✅ Nice work, you're crushing it! 🎉",
+
+> onWrongMessage:  `❌ Incorrect answer. The correct answer was: **${correctAnswer}**.`
+
+The `Competition.options:` MUST be included if you choose either `button` or `dropdown` for the `Competition.inputType`. The bot will not work if that array is empty.
+
+> button requires TWO options
+
+> dropdown requires AT LEAST ONE option
+
 ## Use the Bot
 
 To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
