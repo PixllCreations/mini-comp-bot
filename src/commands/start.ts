@@ -78,19 +78,27 @@ const startCommand = {
       })
     }
 
-    const messages = createCompetitionMessage(competition)
-    const channel = interaction.channel as TextChannel
+    try {
+      const message = createCompetitionMessage(competition)
+      console.log("Sending message:", JSON.stringify(message, null, 2)) // Debug log
 
-    // Send all messages using channel.send
-    for (const message of messages) {
-      await channel.send(message)
-    }
+      // For manually created interactions from /minibatch
+      if (!interaction.reply) {
+        const channel = interaction.channel as TextChannel
+        await channel.send(message)
+        return
+      }
 
-    // If this was a slash command, acknowledge it
-    if (interaction.reply) {
-      await interaction.reply({
-        flags: [MessageFlags.Ephemeral],
-      })
+      // For normal command interactions
+      await interaction.reply(message)
+    } catch (error) {
+      console.error("Error sending message:", error)
+      if (interaction.reply) {
+        await interaction.reply({
+          content: "❌ There was an error sending the competition message.",
+          flags: [MessageFlags.Ephemeral],
+        })
+      }
     }
   },
 }

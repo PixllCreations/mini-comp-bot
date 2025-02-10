@@ -86,7 +86,7 @@ const minBatchCommand = {
 
     // ✅ Step 3: Edit the reply with the result
     await interaction.editReply({
-      content: `✅ Successfully executed \`/start ${week} ${category}\` in **${successCount}** channels.`,
+      content: `✅ Successfully executed week ${week}'s ${category} mini comp in **${successCount}** channels.`,
     })
   },
 }
