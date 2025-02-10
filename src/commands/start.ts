@@ -2,8 +2,9 @@ import {
   SlashCommandBuilder,
   CommandInteraction,
   CommandInteractionOptionResolver,
-  GuildMemberRoleManager,
   MessageFlags,
+  TextChannel,
+  GuildMemberRoleManager,
 } from "discord.js"
 import { competitions } from "../messages/competitions"
 import { createCompetitionMessage } from "../handlers"
@@ -42,30 +43,30 @@ const startCommand = {
     ),
 
   async execute(interaction: CommandInteraction) {
-    const allowedRoleId = process.env.PERMITTED_ROLE
-    const member = interaction.member
+    const option = interaction.options as CommandInteractionOptionResolver
+    const week = option.getInteger("week", true)
+    const category = option.getString("category", true)
 
-    if (!member || !("roles" in member)) {
-      return interaction.reply({
-        content: "❌ You must be in a server to use this command.",
-        flags: [MessageFlags.Ephemeral],
-      })
+    if (interaction.guild) {
+      const allowedRoleId = process.env.ALLOWED_ROLE_ID
+      const member = interaction.member
+
+      if (!member || !("roles" in member)) {
+        return interaction.reply({
+          content: "❌ You must be in a server to use this command.",
+          flags: [MessageFlags.Ephemeral],
+        })
+      }
+
+      const roles = member.roles as GuildMemberRoleManager
+      if (!roles.cache.has(allowedRoleId!)) {
+        return interaction.reply({
+          content: "❌ You do not have permission to use this command.",
+          flags: [MessageFlags.Ephemeral],
+        })
+      }
     }
 
-    // ✅ Fix: Ensure roles are checked properly
-    const roles = member.roles as GuildMemberRoleManager
-    if (!roles.cache.has(allowedRoleId!)) {
-      return interaction.reply({
-        content: `❌ You do not have permission to use this command. Only members with the required role can start competitions.`,
-        flags: [MessageFlags.Ephemeral],
-      })
-    }
-
-    const options = interaction.options as CommandInteractionOptionResolver
-    const week = options.getInteger("week", true)
-    const category = options.getString("category", true)
-
-    // Retrieve the correct competition
     const competition = competitions.find(
       (comp) => comp.week === week && comp.category === category
     )
@@ -77,9 +78,20 @@ const startCommand = {
       })
     }
 
-    // Send the competition message
-    const message = createCompetitionMessage(competition)
-    await interaction.reply(message)
+    const messages = createCompetitionMessage(competition)
+    const channel = interaction.channel as TextChannel
+
+    // Send all messages using channel.send
+    for (const message of messages) {
+      await channel.send(message)
+    }
+
+    // If this was a slash command, acknowledge it
+    if (interaction.reply) {
+      await interaction.reply({
+        flags: [MessageFlags.Ephemeral],
+      })
+    }
   },
 }
 

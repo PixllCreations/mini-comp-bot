@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js"
 import { BOT_TOKEN } from "./config"
 import dotenv from "dotenv"
-import startCommand from "./commands/start" // Updated to "start"
+import { miniBatchCommand, startCommand } from "./commands/index"
 
 dotenv.config()
 
@@ -9,7 +9,8 @@ const CLIENT_ID = process.env.CLIENT_ID!
 const GUILD_ID = process.env.GUILD_ID!
 
 const commands = [
-  startCommand.data.toJSON(), // Registers /start command
+  startCommand.data.toJSON(), // command /start
+  miniBatchCommand.data.toJSON(), // command /minibatch
 ]
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN)

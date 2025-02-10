@@ -1,10 +1,16 @@
+import type { Interaction } from "discord.js"
 import type { UpdateBubbleProps } from "./interfaces"
 
 export default async function updateBubble({
-  user_id,
+  interaction,
   competition_title,
-  snowflake,
 }: UpdateBubbleProps) {
+  const channel =
+    interaction.channel && "name" in interaction.channel
+      ? interaction.channel.name
+      : "unknown"
+  const server = interaction.guild?.name || "unknown"
+
   try {
     const response = await fetch(
       "https://thenotwork.org/version-test/api/1.1/obj/MINI_COMP_BOT_RESPONSES",
@@ -15,9 +21,11 @@ export default async function updateBubble({
           Authorization: `Bearer ${process.env.BUBBLE_API_KEY}`,
         },
         body: JSON.stringify({
-          user_id: user_id,
+          user_id: interaction.user.id,
           poll_title: competition_title,
-          snowflake: snowflake,
+          snowflake: interaction.id,
+          channel: channel,
+          server: server,
         }),
       }
     )

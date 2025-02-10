@@ -6,8 +6,33 @@ import {
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
+  EmbedBuilder,
 } from "discord.js"
 import type { Competition } from "./interfaces"
+
+const DISCORD_MAX_LENGTH = 2000
+
+function splitMessage(content: string): string[] {
+  const messages: string[] = []
+  let currentMessage = ""
+
+  const lines = content.split("\n")
+
+  for (const line of lines) {
+    if (currentMessage.length + line.length + 1 > DISCORD_MAX_LENGTH) {
+      messages.push(currentMessage)
+      currentMessage = line
+    } else {
+      currentMessage += (currentMessage ? "\n" : "") + line
+    }
+  }
+
+  if (currentMessage) {
+    messages.push(currentMessage)
+  }
+
+  return messages
+}
 
 export function createCompetitionMessage(competition: Competition) {
   const components: any[] = []
@@ -50,10 +75,23 @@ export function createCompetitionMessage(competition: Competition) {
     components.push(row)
   }
 
-  return {
-    content: `**${competition.name}**\n${competition.instructions}\n\n**Prompt:** ${competition.prompt}`,
-    components,
-  }
+  const embededImage = competition.image
+    ? new EmbedBuilder().setImage(competition.image).setColor(0x00fd65)
+    : null
+
+  const content = `**${competition.name}**\n${competition.instructions}\n\n**Prompt:** ${competition.prompt}`
+  const messages = splitMessage(content)
+
+  // return {
+  //   content: `**${competition.name}**\n${competition.instructions}\n\n**Prompt:** ${competition.prompt}`,
+  //   embeds: embededImage ? [embededImage] : [],
+  //   components,
+  // }
+  return messages.map((msg, index) => ({
+    content: msg,
+    embeds: index === messages.length - 1 && embededImage ? [embededImage] : [],
+    components: index === messages.length - 1 ? components : [],
+  }))
 }
 
 export function createModal(competition: Competition) {

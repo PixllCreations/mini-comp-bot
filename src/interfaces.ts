@@ -1,3 +1,5 @@
+import type { Interaction } from "discord.js"
+
 export interface Competition {
   name: string
   week: number
@@ -13,11 +15,10 @@ export interface Competition {
 }
 
 export interface UpdateBubbleProps {
-  user_id: string // interaction.user.tag
-  competition_title: string // competition.name
-  snowflake: string // interaction.id
+  interaction: Interaction
+  competition_title: string
 }
 
-export interface Season {
-  [week: number]: Competition[]
-}
+// export interface Season {
+//   [week: number]: Competition[]
+// }

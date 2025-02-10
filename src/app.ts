@@ -5,7 +5,7 @@ import type {
   ButtonInteraction,
 } from "discord.js"
 import { BOT_TOKEN } from "./config"
-import startCommand from "./commands/start"
+import { miniBatchCommand, startCommand } from "./commands/index"
 import { competitions } from "./messages/competitions"
 import { createModal } from "./handlers"
 import updateBubble from "./update-bubble"
@@ -21,6 +21,7 @@ const client = new Client({
 // Store commands in a Collection
 const commands = new Collection<string, any>()
 commands.set(startCommand.data.name, startCommand)
+commands.set(miniBatchCommand.data.name, miniBatchCommand)
 
 client.once("ready", () => {
   console.log(`✅ Logged in as ${client.user?.tag}`)
@@ -89,9 +90,8 @@ client.on("interactionCreate", async (interaction: Interaction) => {
 
     // ✅ Send the answer to Bubble.io
     await updateBubble({
-      user_id: interaction.user.tag,
+      interaction: interaction,
       competition_title: competition.name,
-      snowflake: interaction.id,
     })
   }
 
@@ -124,9 +124,8 @@ client.on("interactionCreate", async (interaction: Interaction) => {
 
     // ✅ Send the answer to Bubble.io
     await updateBubble({
-      user_id: interaction.user.tag,
+      interaction: interaction,
       competition_title: competition.name,
-      snowflake: interaction.id,
     })
   }
 
@@ -170,9 +169,8 @@ client.on("interactionCreate", async (interaction: Interaction) => {
 
     // ✅ Send the answer to Bubble.io
     await updateBubble({
-      user_id: interaction.user.tag,
+      interaction: interaction,
       competition_title: competition.name,
-      snowflake: interaction.id,
     })
   }
 })
