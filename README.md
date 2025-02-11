@@ -28,19 +28,24 @@ To prepare a season's worth of mini comps, you will need to create an object adh
 ```
 // path: src/interface.ts
 
+type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
+
+type InputType = "button" | "dropdown" | "text" | "image"
+
 interface Competition {
-	name: string
-	week: number
-	category: "Cyber" | "Digital Marketing" | "Data Science"
-	instructions: string
-	image?: string
-	prompt: string
-	inputType: "button" | "dropdown" | "text"
-	options?: string[]
-	correctAnswer?: string | string[]
-	onSuccessMessage?: string
-	onWrongMessage?: string
+  name: string
+  week: number
+  category: Category
+  instructions: string
+  image?: string
+  prompt?: string
+  inputType: InputType
+  options?: string[]
+  correctAnswer?: string | string[]
+  onSuccessMessage?: string
+  onWrongMessage?: string
 }
+
 ```
 
 In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]`
@@ -53,8 +58,12 @@ const  competitions:  Competition[] = [
 		name:  "Sus or Trust",
 		week:  1,
 		category:  "Cyber",
-		instructions:  "Decide if the password is strong or weak.",
-		prompt:  "P@ssw0rd123",
+		instructions: formatCompInstructions(
+      		1,
+      		"cybersecurity",
+      		"Decide if the password is **TRUSTworthy** or **SUSworthy**. In other words, would you trust this password to protect your data or Nah?"
+    	),
+		prompt:  "**Password:** P@ssw0rd123",
 		inputType:  "button",
 		options: ["Trust", "Sus"],
 		correctAnswer:  "Sus",
@@ -65,7 +74,7 @@ const  competitions:  Competition[] = [
 		name:  "Guess the Graph",
 		week:  1,
 		category:  "Data Science",
-		instructions:  "Identify what the graph represents.",
+		instructions: "Identify what the graph represents.",
 		image:
 		"https://static01.nyt.com/images/2023/02/09/learning/LebronGraphLN2/LebronGraphLN2-
 		superJumbo.png?quality=75&auto=webp",
@@ -80,16 +89,34 @@ const  competitions:  Competition[] = [
 ```
 
 ### A few things to note:
-The `Copmetition.on_____Message:` keys are optional. There are two default messages that the bot will send if you do not include a custom response:
-> onSuccessMessage:  "✅ Nice work, you're crushing it! 🎉",
 
-> onWrongMessage:  `❌ Incorrect answer. The correct answer was: **${correctAnswer}**.`
+**Instructions formatting:**
+
+The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out. Currently, the format will look like this:
+
+> ## [🏆Mini Comps: Week 1] Digital Marketing :selfie::fireworks::loudspeaker:
+>
+> MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product.
+
+**Succcess/Failure messages**
+
+The `Copmetition.on_____Message:` keys are optional. There are two default messages that the bot will send if you do not include a custom response:
+
+> onSuccessMessage: "✅ Nice work, you're crushing it! 🎉",
+
+> onWrongMessage: `❌ Incorrect answer. The correct answer was: **${correctAnswer}**.`
 
 The `Competition.options:` MUST be included if you choose either `button` or `dropdown` for the `Competition.inputType`. The bot will not work if that array is empty.
 
 > button requires TWO options
 
 > dropdown requires AT LEAST ONE option
+
+**Input Type:**
+The `inputType` governs the kind of response the user is permitted to send. Buttons and Dropdown REQUIRE `options` since the studnets may only select from what you provide. Text and Image are open to how the student wants to respond.
+
+**Correct Answer:**
+If your mini comp has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
 
 ## Use the Bot
 

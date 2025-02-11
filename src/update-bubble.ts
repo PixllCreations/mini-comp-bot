@@ -1,4 +1,3 @@
-import type { Interaction } from "discord.js"
 import type { UpdateBubbleProps } from "./interfaces"
 import fetch from "node-fetch"
 

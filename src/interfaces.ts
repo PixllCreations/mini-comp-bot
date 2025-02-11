@@ -1,21 +1,33 @@
 import type { Interaction } from "discord.js"
 
-export interface Competition {
+type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
+
+type InputType = "button" | "dropdown" | "text" | "image"
+
+interface Competition {
   name: string
   week: number
-  category: "Cyber" | "Digital Marketing" | "Data Science"
+  category: Category
   instructions: string
   image?: string
-  prompt: string
-  inputType: "button" | "dropdown" | "text" | "image"
+  prompt?: string
+  inputType: InputType
   options?: string[]
   correctAnswer?: string | string[]
   onSuccessMessage?: string
   onWrongMessage?: string
 }
 
-export interface UpdateBubbleProps {
+interface CompHeadings {
+  cybersecurity: string
+  digitalMarketing: string
+  dataScience: string
+}
+
+interface UpdateBubbleProps {
   interaction: Interaction
   competition: Competition
   user_response: string
 }
+
+export type { Competition, CompHeadings, UpdateBubbleProps }
