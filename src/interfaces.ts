@@ -7,7 +7,7 @@ export interface Competition {
   instructions: string
   image?: string
   prompt: string
-  inputType: "button" | "dropdown" | "text"
+  inputType: "button" | "dropdown" | "text" | "image"
   options?: string[]
   correctAnswer?: string | string[]
   onSuccessMessage?: string

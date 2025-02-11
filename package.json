@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "discord.js": "^14.17.3",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "form-data": "^4.0.1",
+    "node-fetch": "^3.3.2"
   },
   "scripts": {
     "start": "bun run src/register-commands.ts & bun run --watch src/app.ts"

@@ -9,6 +9,7 @@ import {
 import type { GuildTextBasedChannel } from "discord.js"
 import dotenv from "dotenv"
 import startCommand from "./start"
+import { adminLaunchResponse } from "../messages/bot-response"
 
 dotenv.config()
 
@@ -84,9 +85,8 @@ const minBatchCommand = {
       }
     }
 
-    // Edit the reply with the result
     await interaction.editReply({
-      content: `✅ Successfully executed week ${week}'s ${category} mini comp in **${successCount}** channels.`,
+      content: adminLaunchResponse(week, category, successCount),
     })
   },
 }

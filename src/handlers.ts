@@ -50,13 +50,27 @@ export function createCompetitionMessage(competition: Competition) {
     components.push(row)
   }
 
-  // Create base content string
-  let content = `**${competition.name}**`
+  if (competition.inputType === "image") {
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
+      new ButtonBuilder()
+        .setCustomId(`submit_image_${competition.name}`)
+        .setLabel("Submit Image")
+        .setStyle(ButtonStyle.Primary)
+    )
+    components.push(row)
+  }
+
+  let content = ""
   if (competition.instructions) {
     content += `\n\n${competition.instructions}`
   }
   if (competition.prompt) {
     content += `\n\n${competition.prompt}`
+  }
+
+  if (competition.inputType === "image") {
+    content +=
+      "\n\n**To submit your answer:**\n1. Click 'Submit Image' below\n2. Upload your image in the next message"
   }
 
   // Create embed if image exists
