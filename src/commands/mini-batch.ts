@@ -8,7 +8,7 @@ import {
 
 import type { GuildTextBasedChannel } from "discord.js"
 import dotenv from "dotenv"
-import startCommand from "./start" // ✅ Import the `/start` command
+import startCommand from "./start"
 
 dotenv.config()
 
@@ -49,7 +49,7 @@ const minBatchCommand = {
       })
     }
 
-    // ✅ Step 1: Defer the reply so Discord doesn't time out
+    // Defer the reply so Discord doesn't time out
     await interaction.deferReply({ flags: [MessageFlags.Ephemeral] })
 
     let successCount = 0
@@ -61,7 +61,7 @@ const minBatchCommand = {
         )
 
         if (channel && channel.isTextBased()) {
-          // ✅ Manually create a fake interaction response by calling `/start`
+          // Manually create a fake interaction response by calling `/start`
           const fakeInteraction = {
             channel: channel as GuildTextBasedChannel,
             options: {
@@ -84,7 +84,7 @@ const minBatchCommand = {
       }
     }
 
-    // ✅ Step 3: Edit the reply with the result
+    // Edit the reply with the result
     await interaction.editReply({
       content: `✅ Successfully executed week ${week}'s ${category} mini comp in **${successCount}** channels.`,
     })

@@ -80,7 +80,6 @@ const startCommand = {
 
     try {
       const message = createCompetitionMessage(competition)
-      console.log("Sending message:", JSON.stringify(message, null, 2)) // Debug log
 
       // For manually created interactions from /minibatch
       if (!interaction.reply) {

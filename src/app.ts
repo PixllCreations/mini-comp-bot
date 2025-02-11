@@ -1,4 +1,14 @@
-import { Client, GatewayIntentBits, Collection, MessageFlags } from "discord.js"
+import {
+  Client,
+  GatewayIntentBits,
+  Collection,
+  MessageFlags,
+  ComponentType,
+  ActionRowBuilder,
+  StringSelectMenuBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} from "discord.js"
 import type {
   Interaction,
   StringSelectMenuInteraction,
@@ -43,7 +53,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     }
   }
 
-  // ✅ Handle "Answer" button click to trigger the modal
+  // Handle "Answer" button click to trigger the modal
   if (interaction.isButton() && interaction.customId.startsWith("answer_")) {
     const competitionName = interaction.customId.replace("answer_", "")
     const competition = competitions.find(
@@ -61,7 +71,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     await interaction.showModal(modal)
   }
 
-  // ✅ Handle dropdown (select menu) answer submission
+  // Handle dropdown (select menu) answer submission
   if (interaction.isStringSelectMenu()) {
     const userResponse = (interaction as StringSelectMenuInteraction).values[0]
     const competition = competitions.find((comp) =>
@@ -75,10 +85,29 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       })
     }
 
-    // ✅ Validate the answer
     const isCorrect = Array.isArray(competition.correctAnswer)
       ? competition.correctAnswer.includes(userResponse)
       : competition.correctAnswer === userResponse
+
+    // Create disabled version of the dropdown
+    const disabledComponents = interaction.message.components.map((row) => {
+      const newRow = new ActionRowBuilder<StringSelectMenuBuilder>()
+      row.components.forEach((component) => {
+        if (component.type === ComponentType.StringSelect) {
+          newRow.addComponents(
+            StringSelectMenuBuilder.from(component as any)
+              .setDisabled(true)
+              .setPlaceholder("Answer submitted")
+          )
+        }
+      })
+      return newRow
+    })
+
+    // Update the original message with disabled dropdown
+    await interaction.message.edit({
+      components: disabledComponents,
+    })
 
     await interaction.reply({
       content: isCorrect
@@ -88,14 +117,14 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       flags: [MessageFlags.Ephemeral],
     })
 
-    // ✅ Send the answer to Bubble.io
     await updateBubble({
       interaction: interaction,
-      competition_title: competition.name,
+      competition: competition,
+      user_response: userResponse,
     })
   }
 
-  // ✅ Handle button (Yes/No) responses (Cyber Security Competitions)
+  // Handle button (Yes/No) responses (Cyber Security Competitions)
   if (interaction.isButton() && !interaction.customId.startsWith("answer_")) {
     const userResponse = interaction.customId
     const competition = competitions.find((comp) =>
@@ -109,10 +138,33 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       })
     }
 
-    // ✅ Validate the answer
     const isCorrect = Array.isArray(competition.correctAnswer)
       ? competition.correctAnswer.includes(userResponse)
       : competition.correctAnswer === userResponse
+
+    // Create disabled version of the buttons
+    const disabledComponents = interaction.message.components.map((row) => {
+      const newRow = new ActionRowBuilder<ButtonBuilder>()
+      row.components.forEach((component) => {
+        if (component.type === ComponentType.Button) {
+          newRow.addComponents(
+            ButtonBuilder.from(component as any)
+              .setDisabled(true)
+              .setStyle(
+                component.customId === userResponse
+                  ? ButtonStyle.Primary
+                  : ButtonStyle.Secondary
+              )
+          )
+        }
+      })
+      return newRow
+    })
+
+    // Update the original message with disabled buttons
+    await interaction.message.edit({
+      components: disabledComponents,
+    })
 
     await interaction.reply({
       content: isCorrect
@@ -122,14 +174,14 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       flags: [MessageFlags.Ephemeral],
     })
 
-    // ✅ Send the answer to Bubble.io
     await updateBubble({
       interaction: interaction,
-      competition_title: competition.name,
+      competition: competition,
+      user_response: userResponse,
     })
   }
 
-  // ✅ Handle modal submissions (Text-based answers)
+  // Handle modal submissions (Text-based answers)
   if (interaction.isModalSubmit()) {
     const response = interaction.fields.getTextInputValue(
       "competition_response"
@@ -146,7 +198,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       })
     }
 
-    // ✅ If `correctAnswer` exists, validate it
+    // If `correctAnswer` exists, validate it
     if (competition.correctAnswer) {
       const isCorrect = Array.isArray(competition.correctAnswer)
         ? competition.correctAnswer.includes(response.trim())
@@ -160,17 +212,40 @@ client.on("interactionCreate", async (interaction: Interaction) => {
         flags: [MessageFlags.Ephemeral],
       })
     } else {
-      // ✅ If `correctAnswer` does not exist, just acknowledge the response
+      // If `correctAnswer` does not exist, just acknowledge the response
       await interaction.reply({
         content: "Thanks for answering, nice work! 🎉",
         flags: [MessageFlags.Ephemeral],
       })
     }
 
-    // ✅ Send the answer to Bubble.io
+    // For text input, disable the "Answer" button after submission
+    const disabledComponents = interaction.message?.components?.map((row) => {
+      const newRow = new ActionRowBuilder<ButtonBuilder>()
+      row.components.forEach((component) => {
+        if (component.type === ComponentType.Button) {
+          newRow.addComponents(
+            ButtonBuilder.from(component as any)
+              .setDisabled(true)
+              .setLabel("Answered")
+              .setStyle(ButtonStyle.Secondary)
+          )
+        }
+      })
+      return newRow
+    })
+
+    // If we have access to the original message, update it
+    if (interaction.message) {
+      await interaction.message.edit({
+        components: disabledComponents,
+      })
+    }
+
     await updateBubble({
       interaction: interaction,
-      competition_title: competition.name,
+      competition: competition,
+      user_response: response.trim(),
     })
   }
 })

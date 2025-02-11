@@ -3,7 +3,8 @@ import type { UpdateBubbleProps } from "./interfaces"
 
 export default async function updateBubble({
   interaction,
-  competition_title,
+  competition,
+  user_response,
 }: UpdateBubbleProps) {
   const channel =
     interaction.channel && "name" in interaction.channel
@@ -12,23 +13,22 @@ export default async function updateBubble({
   const server = interaction.guild?.name || "unknown"
 
   try {
-    const response = await fetch(
-      "https://thenotwork.org/version-test/api/1.1/obj/MINI_COMP_BOT_RESPONSES",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.BUBBLE_API_KEY}`,
-        },
-        body: JSON.stringify({
-          user_id: interaction.user.id,
-          poll_title: competition_title,
-          snowflake: interaction.id,
-          channel: channel,
-          server: server,
-        }),
-      }
-    )
+    const response = await fetch(process.env.BUBBLE_API_URL as string, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.BUBBLE_API_KEY}`,
+      },
+      body: JSON.stringify({
+        channel: channel,
+        competition_title: competition.name,
+        competition_week: competition.week,
+        server: server,
+        snowflake: interaction.id,
+        user_id: interaction.user.id,
+        user_response: user_response,
+      }),
+    })
     const responseData = await response.json()
 
     if (!response.ok) {

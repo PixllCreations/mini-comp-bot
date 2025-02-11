@@ -9,8 +9,8 @@ const CLIENT_ID = process.env.CLIENT_ID!
 const GUILD_ID = process.env.GUILD_ID!
 
 const commands = [
-  startCommand.data.toJSON(), // command /start
-  miniBatchCommand.data.toJSON(), // command /minibatch
+  startCommand.data.toJSON(), // command /start {week #} {competition name}
+  miniBatchCommand.data.toJSON(), // command /minibatch {week #} {competition name}
 ]
 
 const rest = new REST({ version: "10" }).setToken(BOT_TOKEN)

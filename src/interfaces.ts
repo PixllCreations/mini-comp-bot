@@ -16,9 +16,6 @@ export interface Competition {
 
 export interface UpdateBubbleProps {
   interaction: Interaction
-  competition_title: string
+  competition: Competition
+  user_response: string
 }
-
-// export interface Season {
-//   [week: number]: Competition[]
-// }
