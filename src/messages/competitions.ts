@@ -1,20 +1,13 @@
 import type { Competition } from "../interfaces"
 import { phishes, phishes_answers } from "./bot-response"
-
-const compHeadings = {
-  cyber: "Cyber Security 💻🔐👾",
-  digitalMarketing: "Digital Marketing :selfie:🎆📢",
-  dataScience: "Data Science 📊📉🔍",
-}
-
-const newLines = "\n\u200B\n"
+import { compHeadings, newLines } from "./markdown-syles"
 
 export const competitions: Competition[] = [
   {
     week: 1,
     category: "Cyber",
     name: "Sus or Trust",
-    instructions: `# [🏆Mini Comps: Week 1] ${compHeadings.cyber}${newLines}Decide if the password is **TRUSTworthy** or **SUSworthy**. In other words, would you trust this password to protect your data or Nah?`,
+    instructions: `# [🏆Mini Comps: Week 1] ${compHeadings.cybersecurity}${newLines}Decide if the password is **TRUSTworthy** or **SUSworthy**. In other words, would you trust this password to protect your data or Nah?`,
     prompt: `**Password:** 2MuchFun!`,
     inputType: "button",
     options: ["Trust", "Sus"],
@@ -31,7 +24,7 @@ export const competitions: Competition[] = [
     image:
       "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",
     prompt: "",
-    inputType: "text",
+    inputType: "image",
   },
   {
     week: 1,
@@ -56,7 +49,7 @@ export const competitions: Competition[] = [
     week: 2,
     category: "Cyber",
     name: "Sneakin or Tweakin",
-    instructions: `# [🏆Mini Comps: Week 2] \`${compHeadings.cyber}\`${newLines}Identify the number of weaknesses in the given password.`,
+    instructions: `# [🏆Mini Comps: Week 2] \`${compHeadings.cybersecurity}\`${newLines}Identify the number of weaknesses in the given password.`,
     prompt: `**Password:** Example123`,
     inputType: "button",
     options: ["1", "2", "3", "4"],
@@ -97,7 +90,7 @@ export const competitions: Competition[] = [
     week: 3,
     category: "Cyber",
     name: "Phind the Phish 🎣🎣",
-    instructions: `# [🏆Mini Comps: Week 3] \`${compHeadings.cyber}\`${newLines}Identify which emails are potential phishing attempts.`,
+    instructions: `# [🏆Mini Comps: Week 3] \`${compHeadings.cybersecurity}\`${newLines}Identify which emails are potential phishing attempts.`,
     prompt: phishes,
     inputType: "dropdown",
     options: [
@@ -135,7 +128,7 @@ export const competitions: Competition[] = [
     week: 4,
     category: "Cyber",
     name: "Caesar Cipher",
-    instructions: `# [🏆Mini Comps: Week 4] \`${compHeadings.cyber}\`${newLines}Decrypt a message using the Caesar Cypher. The Caesar cypher encodes messages by shifting each letter foreward 7 letter; they wrap around at the end. For example A = H, X = D. **Be sure to use ONLY lowercase letters:**`,
+    instructions: `# [🏆Mini Comps: Week 4] \`${compHeadings.cybersecurity}\`${newLines}Decrypt a message using the Caesar Cypher. The Caesar cypher encodes messages by shifting each letter foreward 7 letter; they wrap around at the end. For example A = H, X = D. **Be sure to use ONLY lowercase letters:**`,
     prompt: `mhza ylmslelz dpu nhtlz`,
     inputType: "text",
     correctAnswer: ["fast reflexes win games"],
@@ -162,7 +155,7 @@ export const competitions: Competition[] = [
     week: 5,
     category: "Cyber",
     name: "Atbash Cipher",
-    instructions: `# [🏆Mini Comps: Week 5] \`${compHeadings.cyber}\`${newLines}Decrypt a this message using the Atbash (Substitution) Cypher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**`,
+    instructions: `# [🏆Mini Comps: Week 5] \`${compHeadings.cybersecurity}\`${newLines}Decrypt a this message using the Atbash (Substitution) Cypher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**`,
     image:
       "https://www.wikihow.com/images/thumb/b/b9/Create-Substitution-Ciphers-Step-3.jpg/aid309898-v4-728px-Create-Substitution-Ciphers-Step-3.jpg",
     prompt: `xsznkrlmh dlip zh z gvzn`,

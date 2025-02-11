@@ -1,3 +1,6 @@
+import type { Competition } from "../interfaces"
+import { compHeadings } from "./markdown-syles"
+
 interface ResponseType {
   onSuccessMessage: string
   onWrongMessage: string
@@ -13,6 +16,29 @@ function defaultBotResponse(
   }
 
   return defaultResponse[response]
+}
+
+function adminLaunchResponse(
+  week: number,
+  competition: string,
+  numChannels: number
+) {
+  let heading = ""
+  switch (competition) {
+    case "Cyber":
+      heading = "cybersecurity"
+      break
+    case "Digital Marketing":
+      heading = "digitalMarketing"
+      break
+    case "Data Science":
+      heading = "dataScience"
+      break
+  }
+
+  return `# [Launched] ${
+    compHeadings[heading as keyof typeof compHeadings]
+  }\nMini Comp [Week ${week}] :rocket:launched in **${numChannels}** channels`
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------
@@ -101,4 +127,4 @@ A **scam** pretending to offer a $1,000 scholarship.
 - **Look for urgency tactics:** Phishers try to rush you into acting.  
 - **Verify links:** Hover over links before clicking to see the real URL.`
 
-export { phishes_answers, phishes, defaultBotResponse }
+export { phishes_answers, phishes, adminLaunchResponse, defaultBotResponse }
