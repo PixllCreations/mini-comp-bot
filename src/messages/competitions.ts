@@ -28,7 +28,8 @@ export const competitions: Competition[] = [
     category: "Digital Marketing",
     name: "Patent That pt.1",
     instructions: `# [🏆Mini Comps: Week 1] ${compHeadings.digitalMarketing}${newLines}MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a slogan for this product. Think about something catchy, memorable, an descriptive. The best slogan will be used in a post on the NØTWØRK!${newLines}Draw some inspiration from the logo shown below`,
-    image: "", // TODO: put the logo link here
+    image:
+      "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",
     prompt: "",
     inputType: "text",
   },
