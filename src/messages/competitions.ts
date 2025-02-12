@@ -25,7 +25,7 @@ export const competitions: Competition[] = [
     category: "Digital Marketing",
     name: "Patent That pt.1",
     instructions: formatCompInstructions(
-      2,
+      1,
       "digitalMarketing",
       "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!"
     ),
@@ -76,11 +76,11 @@ export const competitions: Competition[] = [
       "❌ Oops! That is incorrect. `Example123` has 4 weaknesses! It is too short, the letters used form a simple word, the numbers are in a stereotypical order, and there are no special characters.", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
   },
   {
-    week: 1,
+    week: 2,
     category: "Digital Marketing",
     name: "Patent That pt.2",
     instructions: formatCompInstructions(
-      1,
+      2,
       "digitalMarketing",
       "MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!${newLines}Try using tools like Leonardo.ai or Canva to generate images or build custom designs. Draw some inspiration from the logo shown below."
     ),
@@ -100,7 +100,7 @@ export const competitions: Competition[] = [
     ),
 
     image:
-      "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/TV_Consumption.webp?token=GHSAT0AAAAAACZ4OUHJRS5Q3RRYXKNQHM66Z5KKY3Q",
+      "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/TV_Consumption.webp",
     prompt: ``,
     inputType: "dropdown",
     options: [
@@ -188,7 +188,7 @@ export const competitions: Competition[] = [
       "Help the marketing team come up with a clever meme to post in support of our latest product **NoCrastination**."
     ),
     image:
-      "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastination_Meme.jpeg?raw=true",
+      "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/NoCrastination_meme_1.webp",
     prompt: `Complete the text for this meme.`,
     inputType: "text",
   },
@@ -230,7 +230,7 @@ export const competitions: Competition[] = [
       "Help the marketing team come up with a clever meme to post in support of our latest product **NoCrastination**."
     ),
     image:
-      "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastination_mem2.jpeg?raw=true",
+      "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/NoCrastination_meme_2.webp",
     prompt: `Fill in the blanks for this meme by clicking the butotn below and filling in the input.`,
     inputType: "text",
   },

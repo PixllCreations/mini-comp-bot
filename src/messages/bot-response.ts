@@ -30,7 +30,7 @@ function adminLaunchResponse(
 ) {
   let heading = ""
   switch (competition) {
-    case "Cyber":
+    case "Cybersecurity":
       heading = "cybersecurity"
       break
     case "Digital Marketing":
