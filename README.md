@@ -86,8 +86,7 @@ const  competitions:  Competition[] = [
 
 ### A few things to note:
 
-> All text that is to be displayed as a discord message, MAY be formatted using Markdown if you want. Include all of the styles in the strings and they will be rendered accordingly.
-> Here is a helpful markdwon editor that I used: [boom, said markdown editor](https://stackedit.io/app#)
+All text that is to be displayed as a discord message, MAY be formatted using Markdown if you want. Include all of the styles in the strings and they will be rendered accordingly. Here is a helpful markdwon editor that I used: [boom, said markdown editor](https://stackedit.io/app#)
 
 **Instructions for formatting messages:**
 
