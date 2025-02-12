@@ -27,9 +27,8 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       1,
       "digitalMarketing",
-      "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!"
+      "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!\n\u200B\nIdeate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!"
     ),
-    prompt: `Ideate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!`,
     inputType: "text",
   },
   {
@@ -150,20 +149,20 @@ export const competitions: Competition[] = [
     prompt: `Write a caption for a post, advertising our latest product: **NoCrastination**.`,
     inputType: "text",
   },
-  {
-    week: 3,
-    category: "Data Science",
-    name: "Graph the Trend",
-    instructions: formatCompInstructions(
-      3,
-      "dataScience",
-      "Predict the next data points on a trend graph."
-    ),
-    prompt: `Predict the next data points.`,
-    inputType: "dropdown",
-    options: ["10%", "15%", "20%"],
-    correctAnswer: ["15%"],
-  },
+  // {
+  //   week: 3,
+  //   category: "Data Science",
+  //   name: "Graph the Trend",
+  //   instructions: formatCompInstructions(
+  //     3,
+  //     "dataScience",
+  //     "Predict the next data points on a trend graph."
+  //   ),
+  //   prompt: `Predict the next data points.`,
+  //   inputType: "dropdown",
+  //   options: ["10%", "15%", "20%"],
+  //   correctAnswer: ["15%"],
+  // },
   // WEEK 4
   {
     week: 4,
@@ -172,7 +171,7 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       4,
       "cybersecurity",
-      "Decrypt a message using the Caesar Cypher. The Caesar cypher encodes messages by shifting each letter foreward 7 letter; they wrap around at the end. For example A = H, X = D. **Be sure to use ONLY lowercase letters:**"
+      "Decrypt a message using the Caesar Cipher. The Caesar cipher encodes messages by shifting each letter foreward 7 letter; they wrap around at the end. For example A = H, X = D. **Be sure to use ONLY lowercase letters:**"
     ),
     prompt: `mhza ylmslelz dpu nhtlz`,
     inputType: "text",
@@ -212,7 +211,7 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       5,
       "cybersecurity",
-      "Decrypt a this message using the Atbash (Substitution) Cypher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**"
+      "Decrypt this message using the Atbash (Substitution) Cypher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**"
     ),
     image:
       "https://www.wikihow.com/images/thumb/b/b9/Create-Substitution-Ciphers-Step-3.jpg/aid309898-v4-728px-Create-Substitution-Ciphers-Step-3.jpg",

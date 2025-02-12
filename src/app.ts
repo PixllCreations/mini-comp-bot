@@ -114,7 +114,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
           filter: (msg: Message) =>
             msg.author.id === interaction.user.id && msg.attachments.size > 0,
           max: 1,
-          time: timeLimit,
+          // time: timeLimit,
         })
 
         // Send instructions
