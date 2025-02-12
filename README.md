@@ -126,6 +126,7 @@ To use the bot you will send the following command in the channel you wish to se
 
 ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
 
+
 ```
 {
   channel
@@ -137,6 +138,7 @@ ALL response by students with the mini comps will be captured and POSTed to the 
   text_response
   image_response
 }
+
 ```
 
 # poller-bot
