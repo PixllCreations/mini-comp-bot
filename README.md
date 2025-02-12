@@ -8,18 +8,13 @@ Follow these instructions to set up the discord bot (the permissions should be f
 
 ## Permissions
 
-Currently the bot it is set to allow ONLY the admin role to use the it in Discord. To change this, modify the PERMITTED_ROLE in the .env
-
-    Right click the respective server -> Server Settings -> Roles ->
-    Right click the role you want to add -> Select
-    "Copy Role ID" and use that to define the PERMITTED_ROLE
+Currently the bot it is set to allow ONLY the admin role to use the it in Discord. To change this, modify the PERMITTED_ROLE in the .env by pasting the ROLE ID of the desired role in Discord
 
 To add the bot to channels do the following:
+add Poller to the Members and Poller to the Roles
+Then Add the channel Ids to CHANNEL_ID in the .env
 
-    Select the channels you want the bot to send messages to. Go to channel Settings ->
-    Overview -> Add members or roles -> add Poller to the Members and Poller to the Roles
-
-    Then Add the channel Id to CHANNEL_ID in the .env
+To add the bot to a new server, simply update the GUILD_ID in the .env
 
 ## Build the Season's Competitions
 
@@ -48,7 +43,7 @@ interface Competition {
 
 ```
 
-In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]`
+In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]` where each object is the respective competition
 
 ```
 // path: src//messages/competitions.ts
@@ -71,17 +66,18 @@ const  competitions:  Competition[] = [
 		onWrongMessage:  "❌ Oops! That password isn't strong enough!",
 	},
 	{
-		name:  "Guess the Graph",
+		name:  "Build a Logo",
 		week:  1,
-		category:  "Data Science",
-		instructions: "Identify what the graph represents.",
+		category:  "Digital Marketing",
+		instructions: formatCompInstructions(
+      		1,
+      		"digitalMarketing",
+      		"Create a logo for our company's new brand Fuhll Stahch"
+    	),
 		image:
 		"https://static01.nyt.com/images/2023/02/09/learning/LebronGraphLN2/LebronGraphLN2-
 		superJumbo.png?quality=75&auto=webp",
-		prompt:  "What does this graph represent?",
-		inputType:  "dropdown",
-		options: ["Stock Prices", "Population Growth", "Temperature Trends"],
-		correctAnswer:  "Stock Prices",
+		inputType:  "image",
 	},
 
 	...//
@@ -90,7 +86,10 @@ const  competitions:  Competition[] = [
 
 ### A few things to note:
 
-**Instructions formatting:**
+> All text that is to be displayed as a discord message, MAY be formatted using Markdown if you want. Include all of the styles in the strings and they will be rendered accordingly.
+> Here is a helpful markdwon editor that I used: [boom, said markdown editor](https://stackedit.io/app#)
+
+**Instructions for formatting messages:**
 
 The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out. Currently, the format will look like this:
 
@@ -118,19 +117,28 @@ The `inputType` governs the kind of response the user is permitted to send. Butt
 **Correct Answer:**
 If your mini comp has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
 
-## Use the Bot
+## Using the Bot
 
 To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
 
     /start {week #} {competition type}
 
 > {week #} = Competition.week
-
+>
 > {competition type} = Competition.category
 
 ## Collecting responses
 
-ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is ONLY their discord username, interaction id (snowflake), and competition name.
+ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
+
+```discord username
+interaction id
+interaction id (or snowflake)
+competition name
+student response (image or text)
+channel (the channel where the student responded from)
+server (the server in which the compeition was run)
+```
 
 # poller-bot
 
@@ -143,7 +151,7 @@ bun install
 To run:
 
 ```bash
-bun run src/app.js
+bun start
 ```
 
-This project was created using `bun init` in bun v1.1.12. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+At any point, if you update/add anything in the `/commands` directory, run `bun start` again, as the updated commands MUST be registerred with Discord.

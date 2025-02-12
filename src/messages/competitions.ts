@@ -25,14 +25,12 @@ export const competitions: Competition[] = [
     category: "Digital Marketing",
     name: "Patent That pt.1",
     instructions: formatCompInstructions(
-      1,
+      2,
       "digitalMarketing",
-      "MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!${newLines}Draw some inspiration from the logo shown below"
+      "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!"
     ),
-    image:
-      "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",
-    prompt: "",
-    inputType: "image",
+    prompt: `Ideate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!`,
+    inputType: "text",
   },
   {
     week: 1,
@@ -78,16 +76,18 @@ export const competitions: Competition[] = [
       "❌ Oops! That is incorrect. `Example123` has 4 weaknesses! It is too short, the letters used form a simple word, the numbers are in a stereotypical order, and there are no special characters.", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
   },
   {
-    week: 2,
+    week: 1,
     category: "Digital Marketing",
     name: "Patent That pt.2",
     instructions: formatCompInstructions(
-      2,
+      1,
       "digitalMarketing",
-      "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!"
+      "MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!${newLines}Try using tools like Leonardo.ai or Canva to generate images or build custom designs. Draw some inspiration from the logo shown below."
     ),
-    prompt: `Ideate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!`,
-    inputType: "text",
+    image:
+      "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",
+    prompt: "",
+    inputType: "image",
   },
   {
     week: 2,
