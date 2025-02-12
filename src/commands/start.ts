@@ -36,7 +36,7 @@ const startCommand = {
         .setDescription("Select the competition category")
         .setRequired(true)
         .addChoices(
-          { name: "Cyber", value: "Cyber" },
+          { name: "Cybersecurity", value: "Cybersecurity" },
           { name: "Digital Marketing", value: "Digital Marketing" },
           { name: "Data Science", value: "Data Science" }
         )

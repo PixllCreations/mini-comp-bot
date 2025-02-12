@@ -15,6 +15,7 @@
     "node-fetch": "^3.3.2"
   },
   "scripts": {
-    "start": "bun run src/register-commands.ts & bun run --watch src/app.ts"
+    "start": "bun run src/register-commands.ts & bun run src/app.ts",
+    "dev": "bun run src/register-commands.ts & bun run --watch src/app.ts"
   }
 }

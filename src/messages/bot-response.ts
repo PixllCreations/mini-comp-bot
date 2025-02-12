@@ -1,10 +1,12 @@
-import type { Competition } from "../interfaces"
-import { compHeadings } from "./markdown-syles"
+import type { CompHeadings } from "../interfaces"
 
 interface ResponseType {
   onSuccessMessage: string
   onWrongMessage: string
 }
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// Default success and failure messages when students answer
 
 function defaultBotResponse(
   response: keyof ResponseType,
@@ -17,6 +19,9 @@ function defaultBotResponse(
 
   return defaultResponse[response]
 }
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// Success message sent to admin after mini comp launch
 
 function adminLaunchResponse(
   week: number,
@@ -42,6 +47,26 @@ function adminLaunchResponse(
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------
+// Initial message sent to students to introduce and explain the mini comp
+
+const compHeadings: CompHeadings = {
+  cybersecurity: "Cybersecurity 💻🔐👾",
+  digitalMarketing: "Digital Marketing :selfie:🎆📢",
+  dataScience: "Data Science 📊📉🔍",
+}
+
+const newLines = "\n\u200B\n"
+
+function formatCompInstructions(
+  week: number,
+  category: keyof CompHeadings,
+  instructions: string
+) {
+  return `# [🏆Mini Comps: Week ${week}] ${compHeadings[category]}${newLines}${instructions}`
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------------
+// Phishing emails and answers with Markdown
 
 const phishes = `
 ### 📧 Email 1:
@@ -99,9 +124,8 @@ Best regards,
 
 ---
 `
-// ----------------------------------------------------------------------------------------------------------------------------------
 
-const phishes_answers = `### 📧 Email 1: **Legitimate Email ✅**
+const phishesAnswers = `### 📧 Email 1: **Legitimate Email ✅**
 A real **password expiration notice** from the school IT department.  
 - **Key Features:** Uses a school-affiliated email (\`@school.edu\`), provides a **legitimate** password reset link, and offers **IT support contact options**.  
 - **No urgency or threats.**  
@@ -127,4 +151,12 @@ A **scam** pretending to offer a $1,000 scholarship.
 - **Look for urgency tactics:** Phishers try to rush you into acting.  
 - **Verify links:** Hover over links before clicking to see the real URL.`
 
-export { phishes_answers, phishes, adminLaunchResponse, defaultBotResponse }
+// ----------------------------------------------------------------------------------------------------------------------------------
+
+export {
+  phishesAnswers,
+  phishes,
+  adminLaunchResponse,
+  defaultBotResponse,
+  formatCompInstructions,
+}
