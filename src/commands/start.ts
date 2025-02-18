@@ -7,7 +7,7 @@ import {
   GuildMemberRoleManager,
 } from "discord.js"
 import { competitions } from "../messages/competitions"
-import { createCompetitionMessage } from "../handlers"
+import { createCompetitionMessage } from "../utils/handlers"
 import dotenv from "dotenv"
 
 dotenv.config()

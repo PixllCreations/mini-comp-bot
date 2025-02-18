@@ -1,5 +1,7 @@
 import type { Competition } from "../interfaces"
-import { formatCompInstructions, phishes, phishesAnswers } from "./bot-response"
+import { formatCompInstructions } from "./bot-response"
+import { phishes } from "./phishes"
+import { phishesAnswers } from "./phishes-answers"
 
 export const competitions: Competition[] = [
   // WEEK 1

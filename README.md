@@ -1,4 +1,4 @@
-# STEM Mini Comp Bot!
+# STEM Mini Challenge Bot!
 
 The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input.
 
@@ -16,9 +16,9 @@ To add the bot to a channel/s do the following:
 
 To add the bot to a new server, simply update the `GUILD_ID` in the `.env`
 
-## Build the Season's Competitions
+## Build the Season's Challenges
 
-To prepare a season's worth of mini comps, you will need to create an object adhering to the interface defined below.
+To prepare a season's worth of mini challenges, you will need to create an object adhering to the interface defined below.
 
 ```
 // path: src/interface.ts
@@ -43,7 +43,7 @@ interface Competition {
 
 ```
 
-In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]` where each object is a respective competition
+In order to set thecChallenges for a given period of time, you will assemble an array of type `Competition[]` where each object is a respective competition
 
 ```
 // path: src//messages/competitions.ts
@@ -90,7 +90,7 @@ All text that is to be displayed in a discord message, MAY be formatted using Ma
 
 **Instructions for formatting messages:**
 
-The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
+The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini challenge headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
 
 **Succcess/Failure messages**
 
@@ -110,11 +110,11 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 The `inputType` governs the kind of response the user is permitted to send. Buttons and Dropdown REQUIRE `options` since the studnets may only select from what you provide. Text and Image are open to how the student wants to respond.
 
 **Correct Answer:**
-If your mini comp has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
+If your mini challenge has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
 
 ## Using the Bot
 
-To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
+To use the bot you will send the following command in the channel you wish to send the mini challenge to (a single command to send to multiple channels is coming soon). Run the following command:
 
     /start {week #} {competition type}
 
@@ -124,7 +124,7 @@ To use the bot you will send the following command in the channel you wish to se
 
 ## Collecting responses
 
-ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
+ALL response by students with the mini challenges will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
 
 
 ```

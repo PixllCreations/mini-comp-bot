@@ -1,4 +1,4 @@
-import type { UpdateBubbleProps } from "./interfaces"
+import type { UpdateBubbleProps } from "../interfaces"
 import fetch from "node-fetch"
 
 interface ImgurResponse {
@@ -94,7 +94,9 @@ export default async function updateBubble({
     if (!response.ok) {
       console.error("Bubble API Error:", response.status, responseData)
     } else {
-      console.log("✅ Successfully posted to Bubble!")
+      console.log(
+        `✅ Successfully posted interaction ${interaction.id} to Bubble!`
+      )
     }
   } catch (error) {
     console.error("❌ Fetch error:", error)
