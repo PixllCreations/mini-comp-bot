@@ -14,14 +14,21 @@ import { competitions } from "../messages/competitions"
 import { createModal } from "../utils/handlers"
 import updateBubble from "../utils/update-bubble"
 
+function getCompetitionFromButton(customId: string, prefix: string) {
+  const competitionName = customId.replace(prefix, "")
+  const competition = competitions.find((comp) => comp.name === competitionName)
+
+  return { competition: competition, competitionName: competitionName }
+}
+
 export default async function onButtonInteraction(
   interaction: ButtonInteraction
 ) {
   // Handle special submission button click: modal OR image
   if (interaction.customId.startsWith("answer_")) {
-    const competitionName = interaction.customId.replace("answer_", "")
-    const competition = competitions.find(
-      (comp) => comp.name === competitionName
+    const { competition, competitionName } = getCompetitionFromButton(
+      interaction.customId,
+      "answer_"
     )
 
     if (!competition) {
@@ -38,9 +45,9 @@ export default async function onButtonInteraction(
     try {
       await interaction.deferReply({ flags: [MessageFlags.Ephemeral] })
 
-      const competitionName = interaction.customId.replace("submit_image_", "")
-      const competition = competitions.find(
-        (comp) => comp.name === competitionName
+      const { competition, competitionName } = getCompetitionFromButton(
+        interaction.customId,
+        "submit_image_"
       )
 
       if (!competition) {
@@ -65,19 +72,15 @@ export default async function onButtonInteraction(
       }
 
       // Create collector before sending instructions
-      const timeLimit = 60000
       const collector = channel.createMessageCollector({
         filter: (msg: Message) =>
           msg.author.id === interaction.user.id && msg.attachments.size > 0,
         max: 1,
-        // time: timeLimit,
       })
 
       // Send instructions
       await interaction.editReply({
-        content: `Please upload your image in the next message. You have ${
-          timeLimit / 1000
-        } seconds to submit.`,
+        content: `Please upload your image in the next message.`,
       })
 
       collector.on("collect", async (message: Message) => {
@@ -151,7 +154,7 @@ export default async function onButtonInteraction(
           if (collected.size === 0) {
             interaction
               .editReply({
-                content: "❌ No image was submitted within the time limit.",
+                content: "❌ No image was submitted.",
               })
               .catch(console.error)
           }

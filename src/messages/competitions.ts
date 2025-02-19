@@ -83,7 +83,7 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       2,
       "digitalMarketing",
-      "MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!${newLines}Try using tools like Leonardo.ai or Canva to generate images or build custom designs. Draw some inspiration from the logo shown below."
+      `MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!\n\u200B\nTry using tools like Leonardo.ai or Canva to generate images or build custom designs. Draw some inspiration from the logo shown below.`
     ),
     image:
       "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",

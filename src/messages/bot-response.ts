@@ -1,9 +1,4 @@
-import type { CompHeadings } from "../interfaces"
-
-interface ResponseType {
-  onSuccessMessage: string
-  onWrongMessage: string
-}
+import type { CompHeadings, ResponseType } from "../interfaces"
 
 // ----------------------------------------------------------------------------------------------------------------------------------
 // Default success and failure messages when students answer
@@ -55,19 +50,12 @@ const compHeadings: CompHeadings = {
   dataScience: "Data Science 📊📉🔍",
 }
 
-const newLines = "\n\u200B\n"
-
 function formatCompInstructions(
   week: number,
   category: keyof CompHeadings,
   instructions: string
 ) {
-  return `# [🏆Mini Challenges: Week ${week}] ${compHeadings[category]}${newLines}${instructions}`
+  return `# [🏆Mini Challenges: Week ${week}] ${compHeadings[category]}\n\u200B\n${instructions}`
 }
-
-// ----------------------------------------------------------------------------------------------------------------------------------
-// Phishing emails and answers with Markdown
-
-// ----------------------------------------------------------------------------------------------------------------------------------
 
 export { adminLaunchResponse, defaultBotResponse, formatCompInstructions }
