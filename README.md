@@ -1,6 +1,6 @@
 # STEM Mini Comp Bot!
 
-The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input.
+The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input. Something to be aware of is the nearly synonymous language of "challenge" and "competition". The user facing terms now use "challenge" in place of what was "competition". In the code, "competition" is the same as a "challenge". The modification to the terms was made after the bot was finished development and so functions, variables, interfaces, etc. will still use the "competition" terminology even though they are referring to "challenges".
 
 # How to Use!
 
@@ -8,21 +8,32 @@ Follow these instructions to set up the discord bot (the permissions should be f
 
 ## Permissions
 
-Currently the bot it is set to allow ONLY the admin role to use the it in Discord. To change this, modify the `PERMITTED_ROLE` in the `.env` by pasting the role id of the desired role in Discord
+The bot is currently restricted to **admin role only** in Discord. To modify this, update the `.env` file:
+- Set `PERMITTED_ROLE` to the **role ID** of the desired role (only one may be used).
 
-To add the bot to a channel/s do the following: 
-1. Add Poller to the Members and Poller to the Roles
-2. Then add the channel Id/s to `TARGET_CHANNELS` in the `.env`
+## Including the Bot
 
-To add the bot to a new server, simply update the `GUILD_ID` in the `.env`
+### Channel
+To allow the bot to function in specific channels, follow these steps:
+- Add the **channel ID(s)** to `TARGET_CHANNELS` in the `.env` file.
+- To both **Members** and **Roles**, add **Poller**
 
-## Build the Season's Competitions
+### Server
+To deploy the bot in a new server, update the `.env` file:
+- Set `GUILD_ID` to the **server ID**.
+the bot is currently set up to handle ONLY ONE server. You may add as many channels under the same server as you want, but you may only include one server.
 
-To prepare a season's worth of mini comps, you will need to create an object adhering to the interface defined below.
+🚨 **IMPORTANT** 🚨  
+For the bot to send or receive **any messages**, you **must** define:
+- **one `GUILD_ID`**.
+- At least **one value for `TARGET_CHANNELS`**.
+
+
+## Build the Season's Competitions (now "Challenges")
+
+To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season. 
 
 ```
-// path: src/interface.ts
-
 type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
 
 type InputType = "button" | "dropdown" | "text" | "image"
@@ -40,14 +51,11 @@ interface Competition {
   onSuccessMessage?: string
   onWrongMessage?: string
 }
-
 ```
 
-In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]` where each object is a respective competition
+In order to set a season's worth of mini challenges, you must assemble an array of type `Competition[]` where each object is a respective competition. This is the object that will be referenced when a user calls one of the two slash commands (mentioned below in the section titled "**Using the Bot**").
 
 ```
-// path: src//messages/competitions.ts
-
 const  competitions:  Competition[] = [
 	{
 		name:  "Sus or Trust",
@@ -88,13 +96,13 @@ const  competitions:  Competition[] = [
 
 All text that is to be displayed in a discord message, MAY be formatted using Markdown if you want. Include all of the styles in the strings and they will be rendered accordingly. Here is a helpful markdwon editor that I used: [boom, said markdown editor](https://stackedit.io/app#)
 
-**Instructions for formatting messages:**
+**Instructions for formatting instructions:**
 
-The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
+The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini challenge headers. If you need the challenge instructions to be formatted uniquely for a particular competition, you may leave out the aforementioned function and simply style the instructions how you want; just place that string as the value for the `instructions: string` key.
 
-**Succcess/Failure messages**
+**Success/Failure messages**
 
-The `Copmetition.on_____Message:` keys are optional. There are two default messages that the bot will send if you do not include a custom response:
+The `copmetition.on_____Message:` keys are optional. There are currently two default messages that the bot will send if you do not include a custom response (`src/messages/bot-response.ts`):
 
 > onSuccessMessage: "✅ Nice work, you're crushing it! 🎉"
 > 
@@ -107,7 +115,7 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 > "dropdown" requires AT LEAST ONE option
 
 **Input Type:**
-The `inputType` governs the kind of response the user is permitted to send. Buttons and Dropdown REQUIRE `options` since the studnets may only select from what you provide. Text and Image are open to how the student wants to respond.
+The `inputType` decides the type of response the user is asked to use. `Buttons` and `Dropdown` REQUIRE `options` since the students may only select from what is provided. `Text` and `Image` are open to how the student wants to respond.
 
 **Correct Answer:**
 If your mini comp has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
