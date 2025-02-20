@@ -28,6 +28,28 @@ For the bot to send or receive **any messages**, you **must** define:
 - **one `GUILD_ID`**.
 - At least **one value for `TARGET_CHANNELS`**.
 
+## Running the Bot
+
+This bot is currently hosted on **Railway** under the project name **"mini-challenge-bot"**. It runs using the **bun** package manager.
+
+### Running the Bot Locally
+To run the bot locally, pull the project repository
+> `bun install`
+> 
+> `bun run dev`
+
+### Command Management
+This Discord bot operates using slash commands, which are:
+-   Defined in individual files under `src/commands/`. If you add new commands, follow the naming convention of the file name being the command's name. (ex: `/minibatch` -> `mini-batch.ts`)
+-   Registered with Discord in `src/register-commands.ts`.
+
+If you modify any command files or `register-commands.ts`, you must re-register the commands:
+> `bun run src/register-commands.ts`
+
+If running locally, restart the bot after registering commands. You shouldn't need to manually run the register command since that is included in the `dev` script. Just be aware that this registration needs to happen.
+
+### Deploying Updates
+Railway automatically redeploys the bot when updates are pushed to the main branch, so you should not need to worry about manually registering new commands in production. However, if newly created or modified commands do not appear in Discord or do not function as expected, verify they have been properly registered.
 
 ## Build the Season's Competitions (now "Challenges")
 
