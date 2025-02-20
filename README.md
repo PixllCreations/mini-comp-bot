@@ -11,6 +11,19 @@ Follow these instructions to set up the discord bot (the permissions should be f
 The bot is currently restricted to **admin role only** in Discord. To modify this, update the `.env` file:
 - Set `PERMITTED_ROLE` to the **role ID** of the desired role (only one may be used).
 
+To give the bot permsissions in a new server, open the bot in the Discord Developer Portal (currently stored under my account). Then, go to Poller -> OAuth2 -> OAuth2 URL Generator
+
+From the list select `bot`. You will see **Bot Permissions** appear up below. Select the following permissions:
+- Send Message
+- Manage Messages
+- Embed Links
+- Attach Files
+- Read Message History
+- Use Slash Commands
+
+After selecting these, copy the link in the **Generated URL** field. Paste it into a new tab and select the server you want these new permissions to apply to.
+
+
 ## Including the Bot
 
 ### Channel
@@ -21,7 +34,7 @@ To allow the bot to function in specific channels, follow these steps:
 ### Server
 To deploy the bot in a new server, update the `.env` file:
 - Set `GUILD_ID` to the **server ID**.
-the bot is currently set up to handle ONLY ONE server. You may add as many channels under the same server as you want, but you may only include one server.
+the bot is currently set up to handle ONLY ONE server. You may add as many channels under the same server as you want, but you may only include one server. This process is a little redundant at the moment.
 
 🚨 **IMPORTANT** 🚨  
 For the bot to send or receive **any messages**, you **must** define:
