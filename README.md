@@ -51,7 +51,7 @@ If running locally, restart the bot after registering commands. You shouldn't ne
 ### Deploying Updates
 Railway automatically redeploys the bot when updates are pushed to the main branch, so you should not need to worry about manually registering new commands in production. However, if newly created or modified commands do not appear in Discord or do not function as expected, verify they have been properly registered.
 
-## Build the Season's Competitions (now "Challenges")
+## Build the Season's Challenges (formerly "Competitions")
 
 To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season. 
 
@@ -75,7 +75,7 @@ interface Competition {
 }
 ```
 
-In order to set a season's worth of mini challenges, you must assemble an array of type `Competition[]` where each object is a respective competition. This is the object that will be referenced when a user calls one of the two slash commands (mentioned below in the section titled "**Using the Bot**").
+In order to set a season's worth of mini challenges, you must assemble an array of type `Competition[]` where each object is a respective competition. This is the object that will be referenced when a user calls one of the two slash commands.
 
 ```
 const  competitions:  Competition[] = [
@@ -144,45 +144,31 @@ If your mini comp has a correct answer, make sure to include the `correctAnswer`
 
 ## Using the Bot
 
-To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
-
-    /start {week #} {competition type}
+To use the bot, run one of these commands with the required arguments `{week #} {competition type}`:
+- `/start` posts a competition to ONLY the channel in which you run the command.
+- `/minibatch` posts a competition to ALL predefined channels. Assuming the bot has already been included in the proper server and channels, I would suggest runnign this command from an admin channel. However, it is not required and you may run the command from any channel you want.
 
 > {week #} = Competition.week
 >
 > {competition type} = Competition.category
 
+example: `/minibatch 1 Cybersecurity`
+
 ## Collecting responses
 
-ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
+ALL response by students with the mini comps will be captured and sent to the Bubble DB. In the NØTWØRK app, there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected is as follows:
 
 
 ```
 {
+  server
   channel
   competition_title
   competition_week
-  server
-  interaction_snowflake
-  discord_snowflake
-  text_response
-  image_response
+  interaction_snowflake // id student's interaction
+  discord_snowflake // student's discord ID
+  text_response // if student responds using buttons, text input, dropdown
+  image_response // if the student responds with an image
 }
 
 ```
-
-# poller-bot
-
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun start
-```
-
-At any point, if you update/add anything in the `/commands` directory, run `bun start` again, as the updated commands MUST be registerred with Discord.
