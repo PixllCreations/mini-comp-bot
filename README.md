@@ -1,6 +1,6 @@
 # STEM Mini Challenge Bot!
 
-The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input. Something to be aware of is the nearly synonymous language of "challenge" and "competition". The user facing terms now use "challenge" in place of what was "competition". In the code, "competition" is the same as a "challenge". The modification to the terms was made after the bot was finished development and so functions, variables, interfaces, etc. will still use the "competition" terminology even though they are referring to "challenges".
+The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input. Something to be aware of is the nearly synonymous language of **`challenge`** and **`competition`**. The user facing terms now use **`challenge`** in place of what was **`competition`**. In the code, **`competition`** is the same as a **`challenge`**. The modification to the terms was made after the bot was finished development and so functions, variables, interfaces, etc. will still use the **`competition`** terminology even though they are referring to **`challenges`**.
 
 # How to Use!
 
