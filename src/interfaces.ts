@@ -4,6 +4,11 @@ type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
 
 type InputType = "button" | "dropdown" | "text" | "image"
 
+interface ResponseType {
+  onSuccessMessage: string
+  onWrongMessage: string
+}
+
 interface Competition {
   name: string
   week: number
@@ -30,4 +35,4 @@ interface UpdateBubbleProps {
   user_response: string
 }
 
-export type { Competition, CompHeadings, UpdateBubbleProps }
+export type { ResponseType, Competition, CompHeadings, UpdateBubbleProps }

@@ -1,4 +1,4 @@
-# STEM Mini Comp Bot!
+# STEM Mini Challenge Bot!
 
 The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input. Something to be aware of is the nearly synonymous language of "challenge" and "competition". The user facing terms now use "challenge" in place of what was "competition". In the code, "competition" is the same as a "challenge". The modification to the terms was made after the bot was finished development and so functions, variables, interfaces, etc. will still use the "competition" terminology even though they are referring to "challenges".
 
@@ -75,7 +75,7 @@ interface Competition {
 }
 ```
 
-In order to set a season's worth of mini challenges, you must assemble an array of type `Competition[]` where each object is a respective competition. This is the object that will be referenced when a user calls one of the two slash commands.
+In order to set the competitions for a given period of time, you will assemble an array of type `Competition[]` where each object is a respective competition
 
 ```
 const  competitions:  Competition[] = [
@@ -120,7 +120,7 @@ All text that is to be displayed in a discord message, MAY be formatted using Ma
 
 **Instructions for formatting instructions:**
 
-The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini challenge headers. If you need the challenge instructions to be formatted uniquely for a particular competition, you may leave out the aforementioned function and simply style the instructions how you want; just place that string as the value for the `instructions: string` key.
+The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
 
 **Success/Failure messages**
 
@@ -140,13 +140,13 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 The `inputType` decides the type of response the user is asked to use. `Buttons` and `Dropdown` REQUIRE `options` since the students may only select from what is provided. `Text` and `Image` are open to how the student wants to respond.
 
 **Correct Answer:**
-If your mini comp has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
+If your mini challenge has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
 
 ## Using the Bot
 
-To use the bot, run one of these commands with the required arguments `{week #} {competition type}`:
-- `/start` posts a competition to ONLY the channel in which you run the command.
-- `/minibatch` posts a competition to ALL predefined channels. Assuming the bot has already been included in the proper server and channels, I would suggest runnign this command from an admin channel. However, it is not required and you may run the command from any channel you want.
+To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
+
+    /start {week #} {competition type}
 
 > {week #} = Competition.week
 >
@@ -156,7 +156,7 @@ example: `/minibatch 1 Cybersecurity`
 
 ## Collecting responses
 
-ALL response by students with the mini comps will be captured and sent to the Bubble DB. In the NØTWØRK app, there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected is as follows:
+ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
 
 
 ```
