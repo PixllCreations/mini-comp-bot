@@ -7,6 +7,7 @@ import {
 import type { StringSelectMenuInteraction } from "discord.js"
 import { competitions } from "../messages/competitions"
 import updateBubble from "../utils/update-bubble"
+import { studentAnswerResponse } from "../messages/bot-response"
 
 export default async function onStringSelectMenuInteraction(
   interaction: StringSelectMenuInteraction
@@ -47,13 +48,7 @@ export default async function onStringSelectMenuInteraction(
     components: disabledComponents,
   })
 
-  await interaction.reply({
-    content: isCorrect
-      ? competition.onSuccessMessage || "✅ Correct answer! 🎉"
-      : competition.onWrongMessage ||
-        `❌ Incorrect answer. The correct answer was: **${competition.correctAnswer}**.`,
-    flags: [MessageFlags.Ephemeral],
-  })
+  await studentAnswerResponse(interaction, isCorrect, competition)
 
   await updateBubble({
     interaction: interaction,

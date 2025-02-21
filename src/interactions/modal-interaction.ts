@@ -1,11 +1,12 @@
+import type { ModalSubmitInteraction } from "discord.js"
 import {
-  MessageFlags,
-  ComponentType,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  ComponentType,
+  MessageFlags,
 } from "discord.js"
-import type { ModalSubmitInteraction } from "discord.js"
+import { defaultBotResponse } from "../messages/bot-response"
 import { competitions } from "../messages/competitions"
 import updateBubble from "../utils/update-bubble"
 
@@ -38,8 +39,10 @@ export default async function onModalSubmitInteraction(
     })
   } else {
     // If `correctAnswer` does not exist, just acknowledge the response
+    const plug = `You just got **500** Silver Coins:money_with_wings: :moneybag:! Head on over to [The NØTWØRK](https://thenotwork.org/challenges)`
+
     await interaction.reply({
-      content: "Thanks for answering, nice work! 🎉",
+      content: `${defaultBotResponse("onSuccessMessage")}\n\u200B\n${plug}`,
       flags: [MessageFlags.Ephemeral],
     })
   }

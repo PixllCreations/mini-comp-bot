@@ -46,7 +46,6 @@ client.on("interactionCreate", async (interaction: Interaction) => {
         })
       }
     } else if (interaction.isButton()) {
-      // TODO: implement function from user-interaction.ts
       onButtonInteraction(interaction)
     } else if (interaction.isStringSelectMenu()) {
       onStringSelectMenuInteraction(interaction)

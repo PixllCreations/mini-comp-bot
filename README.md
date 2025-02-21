@@ -8,17 +8,17 @@ The goal of this bot is to send predefined STEM Mini competition to select Disco
 
 Grant it the following **Discord permissions**:
 
+**General Permissions**
+✅ `View Channels` - Required to read messages in the channels.
+
 **Text Permissions**
-✅ `View Channels` - Required to read messages in the channels.  
 ✅ `Send Messages` - Required to send messages and interactions.  
 ✅ `Send Messages in Threads` - If you want the bot to reply inside threads.  
+✅ `Manage Messages` - Required to delete messages.  
 ✅ `Embed Links` - Allows the bot to send rich embeds.  
 ✅ `Attach Files` - Allows the bot to send images and files.  
 ✅ `Read Message History` - Needed to access past messages (e.g., checking prior questions).  
 ✅ `Use Slash Commands` - Required for slash commands.
-
-**Message Management**
-✅ `Manage Messages` - Required to delete messages.  
 
 ## **2. Where to Set These Permissions?**
 
@@ -30,8 +30,8 @@ There are **two places** where you must configure these permissions.
 2.  Select the bot ("Poller").
 3.  Navigate to **OAuth2 > OAuth2 URL Generator**.
 4.  Under **SCOPES**, select:
-    -   `bot`
-    -   `applications.commands` (required for slash commands)
+    - `bot`
+    - `applications.commands` (required for slash commands)
 5.  Scroll down to **BOT PERMISSIONS** and select the permissions mentioned above.
 6.  Copy the generated **OAuth2 URL** and use it to invite your bot to the server.
 
@@ -53,13 +53,15 @@ TARGET_CHANNELS=channels-to-receive-challenges,csv-if-more-than-one
 ```
 
 If you need a new Bot token:
+
 1.  Go to the Discord Developer Portal → [Discord Developer Portal](https://discord.com/developers/applications).
 2.  Select the bot ("Poller").
 3.  Navigate to **Bot > Token > Reset Token**.
-4. Paste this in the .env
+4.  Paste this in the .env
 
 🚨 **IMPORTANT** 🚨  
 For the bot to send or receive any messages, you must define:
+
 - One and only one **`GUILD_ID`**.
 - At least one value for **`TARGET_CHANNELS`**.
 
@@ -80,9 +82,11 @@ To run the bot locally, pull the project repository
 > `bun run dev`
 
 ### Command Management
+
 This Discord bot is triggered with slash commands, these are:
--   Defined in individual files under `src/commands/`. If you add new commands, follow the naming convention of the file name being the command's name. (ex: `/minibatch` -> `mini-batch.ts`)
--   Registered with Discord in `src/register-commands.ts`.
+
+- Defined in individual files under `src/commands/`. If you add new commands, follow the naming convention of the file name being the command's name. (ex: `/minibatch` -> `mini-batch.ts`)
+- Registered with Discord in `src/register-commands.ts`.
 
 If you modify any command files or `register-commands.ts`, you must re-register the commands:
 
@@ -99,7 +103,7 @@ Railway automatically redeploys the bot when updates are pushed to the main bran
 To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season.
 
 ```
-type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
+type Category = "Cybersecurity" | "Content Creation" | "Data Science"
 
 type InputType = "button" | "dropdown" | "text" | "image"
 
@@ -141,10 +145,10 @@ const  competitions:  Competition[] = [
 	{
 		name:  "Build a Logo",
 		week:  1,
-		category:  "Digital Marketing",
+		category:  "Content Creation",
 		instructions: formatCompInstructions(
       		1,
-      		"digitalMarketing",
+      		"contentCreation",
       		"Create a logo for our company's new brand Fuhll Stahch"
     	),
 		image:
@@ -184,7 +188,6 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 **Image:** The `image` value will be displayed with the instructions. You can see this implemented in the first two weeks of Data Science challenges: I send a graph along with the instructions.
 
 **Prompt:** The `prompt` value will be displayed as an embeded block. This is good for any text block/s you want to stand out or that are over 2,000 characters (see Cyber security week 3 "Phind the Phish").
-
 
 # Using the Bot
 
