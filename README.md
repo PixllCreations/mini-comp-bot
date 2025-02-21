@@ -64,6 +64,7 @@ For the bot to send or receive any messages, you must define:
 - At least one value for **`TARGET_CHANNELS`**.
 
 The bot is currently restricted to **admin role only** in Discord. To modify this, update the `.env` file:
+
 - Set `PERMITTED_ROLE` to the **role ID** of the desired role (only one may be used).
 
 # Running the Bot
@@ -71,9 +72,11 @@ The bot is currently restricted to **admin role only** in Discord. To modify thi
 This bot is currently hosted on **Railway** under the project name **`mini-challenge-bot`**. It runs using the **bun** package manager.
 
 ### Running the Bot Locally
+
 To run the bot locally, pull the project repository
+
 > `bun install`
-> 
+>
 > `bun run dev`
 
 ### Command Management
@@ -82,16 +85,18 @@ This Discord bot is triggered with slash commands, these are:
 -   Registered with Discord in `src/register-commands.ts`.
 
 If you modify any command files or `register-commands.ts`, you must re-register the commands:
+
 > `bun run src/register-commands.ts`
 
 If running locally, restart the bot after registering commands. You shouldn't need to manually run the register command since that is included in the `dev` script. Just be aware that this registration needs to happen.
 
 ### Deploying Updates
+
 Railway automatically redeploys the bot when updates are pushed to the main branch, so you should not need to worry about manually registering new commands in production. However, if newly created or modified commands do not appear in Discord or do not function as expected, verify they have been properly registered.
 
 # Build the Season's Challenges
 
-To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season. 
+To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season.
 
 ```
 type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
@@ -163,13 +168,13 @@ The function `formatCompInstructions(...//)` is used to ensure consistent format
 **Success/Failure messages:** The `copmetition.on_____Message:` keys are optional. There are currently two default messages that the bot will send if you do not include a custom response (`src/messages/bot-response.ts`):
 
 > onSuccessMessage: "✅ Nice work, you're crushing it! 🎉"
-> 
+>
 > onWrongMessage: `❌ Incorrect answer. The correct answer was: **${correctAnswer}**.`
 
 The `Competition.options:` MUST be included if you choose either `button` or `dropdown` for the `Competition.inputType`. The bot will not work if that array is empty.
 
 > "button" requires TWO options
-> 
+>
 > "dropdown" requires AT LEAST ONE option
 
 **Input Type:** The `inputType` decides the type of response the user is asked to use. `Buttons` and `Dropdown` REQUIRE `options` since the students may only select from what is provided. `Text` and `Image` are open to how the student wants to respond.
@@ -184,6 +189,7 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 # Using the Bot
 
 Use one of the two slash commands `/start` or `/minibatch` followed by two arguments `{week #} {competition category}`, defining which of your predefined competitions you want to send.
+
 1. `/start` sends a challenge to the channel in which the command is run
 2. `/minibatch` sends a challenge to each of the predefined channels
 
