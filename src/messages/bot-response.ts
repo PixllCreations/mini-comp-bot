@@ -1,6 +1,5 @@
 import type { CompHeadings, ResponseType } from "../interfaces"
 
-// ----------------------------------------------------------------------------------------------------------------------------------
 // Default success and failure messages when students answer
 
 function defaultBotResponse(
@@ -15,7 +14,6 @@ function defaultBotResponse(
   return defaultResponse[response]
 }
 
-// ----------------------------------------------------------------------------------------------------------------------------------
 // Success message sent to admin after mini challenge launch
 
 function adminLaunchResponse(
@@ -23,30 +21,31 @@ function adminLaunchResponse(
   competition: string,
   numChannels: number
 ) {
-  let heading = ""
-  switch (competition) {
-    case "Cybersecurity":
-      heading = "cybersecurity"
-      break
-    case "Digital Marketing":
-      heading = "digitalMarketing"
-      break
-    case "Data Science":
-      heading = "dataScience"
-      break
-  }
-
+  console.log(
+    competition
+      .toLowerCase()
+      .replace(/(?:^\w|\b\w)/g, (match, index) =>
+        index === 0 ? match.toLowerCase() : match.toUpperCase()
+      )
+      .replace(/\s+/g, "")
+  )
   return `# [Launched] ${
-    compHeadings[heading as keyof typeof compHeadings]
+    compHeadings[
+      competition
+        .toLowerCase()
+        .replace(/(?:^\w|\b\w)/g, (match, index) =>
+          index === 0 ? match.toLowerCase() : match.toUpperCase()
+        )
+        .replace(/\s+/g, "") as keyof typeof compHeadings
+    ]
   }\nMini Challenge [Week ${week}] :rocket:launched in **${numChannels}** channels`
 }
 
-// ----------------------------------------------------------------------------------------------------------------------------------
 // Initial message sent to students to introduce and explain the mini comp
 
 const compHeadings: CompHeadings = {
   cybersecurity: "Cybersecurity 💻🔐👾",
-  digitalMarketing: "Digital Marketing :selfie:🎆📢",
+  contentCreation: "Content Creation :selfie:🎆📢",
   dataScience: "Data Science 📊📉🔍",
 }
 

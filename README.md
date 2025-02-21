@@ -99,7 +99,7 @@ Railway automatically redeploys the bot when updates are pushed to the main bran
 To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season.
 
 ```
-type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
+type Category = "Cybersecurity" | "Content Creation" | "Data Science"
 
 type InputType = "button" | "dropdown" | "text" | "image"
 
@@ -141,10 +141,10 @@ const  competitions:  Competition[] = [
 	{
 		name:  "Build a Logo",
 		week:  1,
-		category:  "Digital Marketing",
+		category:  "Content Creation",
 		instructions: formatCompInstructions(
       		1,
-      		"digitalMarketing",
+      		"contentCreation",
       		"Create a logo for our company's new brand Fuhll Stahch"
     	),
 		image:

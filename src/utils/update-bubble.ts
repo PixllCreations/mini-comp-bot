@@ -80,7 +80,7 @@ export default async function updateBubble({
       },
       body: JSON.stringify({
         channel: channel,
-        competition_title: competition.name,
+        competition_title: competition.slug,
         competition_week: competition.week,
         server: server,
         interaction_snowflake: interaction.id,

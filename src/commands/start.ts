@@ -37,7 +37,7 @@ const startCommand = {
         .setRequired(true)
         .addChoices(
           { name: "Cybersecurity", value: "Cybersecurity" },
-          { name: "Digital Marketing", value: "Digital Marketing" },
+          { name: "Content Creation", value: "Content Creation" },
           { name: "Data Science", value: "Data Science" }
         )
     ),

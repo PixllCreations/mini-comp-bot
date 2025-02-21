@@ -1,6 +1,6 @@
 import type { Interaction } from "discord.js"
 
-type Category = "Cybersecurity" | "Digital Marketing" | "Data Science"
+type Category = "Cybersecurity" | "Content Creation" | "Data Science"
 
 type InputType = "button" | "dropdown" | "text" | "image"
 
@@ -10,6 +10,8 @@ interface ResponseType {
 }
 
 interface Competition {
+  // minis_ds_wk01_01 -> last digits are if we have > 1 in same week. If we had two Cybersecurity competitions in one week then we'd have minis_ds_wk01_01 and minis_ds_wk01_02
+  slug: `minis_${string}_wk${number}_${number}`
   name: string
   week: number
   category: Category
@@ -25,7 +27,7 @@ interface Competition {
 
 interface CompHeadings {
   cybersecurity: string
-  digitalMarketing: string
+  contentCreation: string
   dataScience: string
 }
 

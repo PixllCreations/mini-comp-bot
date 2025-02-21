@@ -6,6 +6,7 @@ import { phishesAnswers } from "./phishes-answers"
 export const competitions: Competition[] = [
   // WEEK 1
   {
+    slug: "minis_cs_wk01_01",
     week: 1,
     category: "Cybersecurity",
     name: "Sus or Trust",
@@ -23,17 +24,19 @@ export const competitions: Competition[] = [
       "❌ Oops! `2MuchFun` isn't strong enough! It's actually pretty sus tbh.", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
   },
   {
+    slug: "minis_cc_wk01_01",
     week: 1,
-    category: "Digital Marketing",
+    category: "Content Creation",
     name: "Patent That pt.1",
     instructions: formatCompInstructions(
       1,
-      "digitalMarketing",
+      "contentCreation",
       "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!\n\u200B\nIdeate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!"
     ),
     inputType: "text",
   },
   {
+    slug: "minis_ds_wk01_01",
     week: 1,
     category: "Data Science",
     name: "Guess the Graph pt.1",
@@ -59,6 +62,7 @@ export const competitions: Competition[] = [
   },
   // WEEK 2
   {
+    slug: "minis_cs_wk02_01",
     week: 2,
     category: "Cybersecurity",
     name: "Sneakin or Tweakin",
@@ -77,13 +81,14 @@ export const competitions: Competition[] = [
       "❌ Oops! That is incorrect. `Example123` has 4 weaknesses! It is too short, the letters used form a simple word, the numbers are in a stereotypical order, and there are no special characters.", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
   },
   {
+    slug: "minis_cc_wk02_01",
     week: 2,
-    category: "Digital Marketing",
+    category: "Content Creation",
     name: "Patent That pt.2",
     instructions: formatCompInstructions(
       2,
-      "digitalMarketing",
-      `MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think about something that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!\n\u200B\nTry using tools like Leonardo.ai or Canva to generate images or build custom designs. Draw some inspiration from the logo shown below.`
+      "contentCreation",
+      `MaRKeT reSEarCh suggests that many students struggle with ProRASstiNAtiOn. Stiegler EdTech has created a product that is sweeping the nation. This new product is called **NoCrastination**. We need your help to create a logo for this product. Think of a logo that is fun, memorable, and descriptive of the product idea. The best logo will be used in a post on the NØTWØRK!\n\u200B\nTry using tools like Leonardo.ai or Canva to generate images or create custom designs. Draw some inspiration from the logo shown below.`
     ),
     image:
       "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastinationLogo.jpeg?raw=true",
@@ -91,6 +96,7 @@ export const competitions: Competition[] = [
     inputType: "image",
   },
   {
+    slug: "minis_ds_wk02_01",
     week: 2,
     category: "Data Science",
     name: "Guess the Graph pt.2",
@@ -105,7 +111,7 @@ export const competitions: Competition[] = [
     prompt: ``,
     inputType: "dropdown",
     options: [
-      "Time spent looking for something to watch vs. actually watching something",
+      "Time spent finding something to watch vs.\nactually watching something",
       "Amount of sugar in a Pixy Stix vs protein",
       "Ratio or People to Penguins in Alaska",
       "Ratio of people who prefer dogs to cats",
@@ -116,13 +122,14 @@ export const competitions: Competition[] = [
   },
   // WEEK 3
   {
+    slug: "minis_cs_wk03_01",
     week: 3,
     category: "Cybersecurity",
     name: "Phind the Phish 🎣🎣",
     instructions: formatCompInstructions(
       3,
       "cybersecurity",
-      "Identify which emails are potential phishing attempts."
+      "Identify which of these emails might be phishing attempts."
     ),
     prompt: phishes,
     inputType: "dropdown",
@@ -138,13 +145,14 @@ export const competitions: Competition[] = [
     onWrongMessage: `❌ Oh no, you got PHISHed 😳🎣🎣😱!! The second and third emails are the PHISHes. \n\n${phishesAnswers}`,
   },
   {
+    slug: "minis_cc_wk03_01",
     week: 3,
-    category: "Digital Marketing",
+    category: "Content Creation",
     name: "Patent That pt.3",
     instructions: formatCompInstructions(
       3,
-      "digitalMarketing",
-      "Stigler's marketing team is brainstorming caption ideas for a social media post. Help them out by filling in the blank! The best caption will be used in the post on the NØTWØRK!"
+      "contentCreation",
+      "Stiegler's content creation team is brainstorming caption ideas for a social media post. Help them out by filling in the blank! The best caption will be used in the post on the NØTWØRK!"
     ),
     image:
       "https://github.com/Stiegler-EdTech/mini-comp-bot/blob/main/images/NoCrastination_SM_Post.jpeg?raw=true",
@@ -167,26 +175,28 @@ export const competitions: Competition[] = [
   // },
   // WEEK 4
   {
+    slug: "minis_cs_wk04_01",
     week: 4,
     category: "Cybersecurity",
     name: "Caesar Cipher",
     instructions: formatCompInstructions(
       4,
       "cybersecurity",
-      "Decrypt a message using the Caesar Cipher. The Caesar cipher encodes messages by shifting each letter foreward 7 letter; they wrap around at the end. For example A = H, X = D. **Be sure to use ONLY lowercase letters:**"
+      "Decrypt a message using the Caesar Cipher. The Caesar cipher encodes messages by shifting each letter forward 7 letter; they wrap around at the end. For example: A = H, X = D. **Be sure to use ONLY lowercase letters:**"
     ),
     prompt: `mhza ylmslelz dpu nhtlz`,
     inputType: "text",
     correctAnswer: ["fast reflexes win games"],
   },
   {
+    slug: "minis_cc_wk04_01",
     week: 4,
-    category: "Digital Marketing",
+    category: "Content Creation",
     name: "Patent That pt.4",
     instructions: formatCompInstructions(
       4,
-      "digitalMarketing",
-      "Help the marketing team come up with a clever meme to post in support of our latest product **NoCrastination**."
+      "contentCreation",
+      "Help the content creation team come up with a clever meme to post in support of our latest product **NoCrastination**."
     ),
     image:
       "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/NoCrastination_meme_1.webp",
@@ -194,6 +204,7 @@ export const competitions: Competition[] = [
     inputType: "text",
   },
   {
+    slug: "minis_ds_wk04_01",
     week: 4,
     category: "Data Science",
     name: "Graph the Facts",
@@ -207,13 +218,14 @@ export const competitions: Competition[] = [
   },
   // WEEK 5
   {
+    slug: "minis_cs_wk05_01",
     week: 5,
     category: "Cybersecurity",
     name: "Atbash Cipher",
     instructions: formatCompInstructions(
       5,
       "cybersecurity",
-      "Decrypt this message using the Atbash (Substitution) Cypher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**"
+      "Decrypt this message using the Atbash (Substitution) Cipher key. Use the image below as a guide. To decode the message, you'll need to flip the alphabet and transpose the letters onto the encrypted message. **Be sure to use ONLY lowercase letters:**"
     ),
     image:
       "https://www.wikihow.com/images/thumb/b/b9/Create-Substitution-Ciphers-Step-3.jpg/aid309898-v4-728px-Create-Substitution-Ciphers-Step-3.jpg",
@@ -222,20 +234,22 @@ export const competitions: Competition[] = [
     correctAnswer: ["champions work as a team"],
   },
   {
+    slug: "minis_cc_wk05_01",
     week: 5,
-    category: "Digital Marketing",
+    category: "Content Creation",
     name: "Patent That pt.5",
     instructions: formatCompInstructions(
       5,
-      "digitalMarketing",
-      "Help the marketing team come up with a clever meme to post in support of our latest product **NoCrastination**."
+      "contentCreation",
+      "Help the content creation team come up with a clever meme to post in support of our latest product **NoCrastination**."
     ),
     image:
       "https://raw.githubusercontent.com/Stiegler-EdTech/mini-comp-bot/refs/heads/main/images/NoCrastination_meme_2.webp",
-    prompt: `Fill in the blanks for this meme by clicking the butotn below and filling in the input.`,
+    prompt: `Fill in the blanks for this meme by clicking the button below and filling in the input.`,
     inputType: "text",
   },
   {
+    slug: "minis_ds_wk05_01",
     week: 5,
     category: "Data Science",
     name: "Graph the Facts (Part 2)",
