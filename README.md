@@ -2,48 +2,73 @@
 
 The goal of this bot is to send predefined STEM Mini competition to select Discord channels. Each competition will consist of one question that is answerable in the following format: button, dropdown, text input. Something to be aware of is the nearly synonymous language of **`challenge`** and **`competition`**. The user facing terms now use **`challenge`** in place of what was **`competition`**. In the code, **`competition`** is the same as a **`challenge`**. The modification to the terms was made after the bot was finished development and so functions, variables, interfaces, etc. will still use the **`competition`** terminology even though they are referring to **`challenges`**.
 
-# How to Use
+# Permissions
 
-Follow these instructions to set up the discord bot (the permissions should be fine for now, but feel free to update things as needed).
+## 1. Required Bot Permissions
 
-## Permissions
+Grant it the following **Discord permissions**:
+
+**Text Permissions**
+✅ `View Channels` - Required to read messages in the channels.  
+✅ `Send Messages` - Required to send messages and interactions.  
+✅ `Send Messages in Threads` - If you want the bot to reply inside threads.  
+✅ `Embed Links` - Allows the bot to send rich embeds.  
+✅ `Attach Files` - Allows the bot to send images and files.  
+✅ `Read Message History` - Needed to access past messages (e.g., checking prior questions).  
+✅ `Use Slash Commands` - Required for slash commands.
+
+**Message Management**
+✅ `Manage Messages` - Required to delete messages.  
+
+## **2. Where to Set These Permissions?**
+
+There are **two places** where you must configure these permissions.
+
+### **A) Discord Developer Portal (Bot Token & OAuth)**
+
+1.  **Go to the Discord Developer Portal** → [Discord Developer Portal](https://discord.com/developers/applications).
+2.  Select the bot ("Poller").
+3.  Navigate to **OAuth2 > OAuth2 URL Generator**.
+4.  Under **SCOPES**, select:
+    -   `bot`
+    -   `applications.commands` (required for slash commands)
+5.  Scroll down to **BOT PERMISSIONS** and select the permissions mentioned above.
+6.  Copy the generated **OAuth2 URL** and use it to invite your bot to the server.
+
+### **B) Discord Server Settings (Per-Channel Permissions)**
+
+1.  Go to your server.
+2.  Navigate to each **channel**.
+3.  Click on **Edit Channel** (⚙️ icon next to the channel).
+4.  Go to **Permissions**.
+5.  Add the **Poller** bot and explicitly grant it the necessary permissions.
+
+## **3. Bot Token & .env File**
+
+```
+BOT_TOKEN=defined in Railway.
+CLIENT_ID=your-client-id-here
+GUILD_ID=your-test-server-id-here
+TARGET_CHANNELS=channels-to-receive-challenges,csv-if-more-than-one
+```
+
+If you need a new Bot token:
+1.  Go to the Discord Developer Portal → [Discord Developer Portal](https://discord.com/developers/applications).
+2.  Select the bot ("Poller").
+3.  Navigate to **Bot > Token > Reset Token**.
+4. Paste this in the .env
+
+🚨 **IMPORTANT** 🚨  
+For the bot to send or receive any messages, you must define:
+- One and only one **`GUILD_ID`**.
+- At least one value for **`TARGET_CHANNELS`**.
 
 The bot is currently restricted to **admin role only** in Discord. To modify this, update the `.env` file:
 - Set `PERMITTED_ROLE` to the **role ID** of the desired role (only one may be used).
 
-To give the bot permsissions in a new server, open the bot in the Discord Developer Portal (currently stored under my account). Then, go to Poller -> OAuth2 -> OAuth2 URL Generator
+# Running the Bot
 
-From the list select `bot`. You will see **Bot Permissions** appear up below. Select the following permissions:
-- Send Message
-- Manage Messages
-- Embed Links
-- Attach Files
-- Read Message History
-- Use Slash Commands
-
-After selecting these, copy the link in the **Generated URL** field. Paste it into a new tab and select the server you want these new permissions to apply to.
-
-
-## Including the Bot
-
-### Channel
-To allow the bot to function in specific channels, follow these steps:
-- Add the **channel ID(s)** to `TARGET_CHANNELS` in the `.env` file.
-- To both **Members** and **Roles**, add **Poller**
-
-### Server
-To deploy the bot in a new server, update the `.env` file:
-- Set `GUILD_ID` to the **server ID**.
-the bot is currently set up to handle ONLY ONE server. You may add as many channels under the same server as you want, but you may only include one server. This process is a little redundant at the moment.
-
-🚨 **IMPORTANT** 🚨  
-For the bot to send or receive **any messages**, you **must** define:
-- **one `GUILD_ID`**.
-- At least **one value for `TARGET_CHANNELS`**.
-
-## Running the Bot
-
-This bot is currently hosted on **Railway** under the project name **"mini-challenge-bot"**. It runs using the **bun** package manager.
+This bot is currently hosted on **Railway** under the project name **`mini-challenge-bot`**. It runs using the **bun** package manager.
 
 ### Running the Bot Locally
 To run the bot locally, pull the project repository
@@ -52,7 +77,7 @@ To run the bot locally, pull the project repository
 > `bun run dev`
 
 ### Command Management
-This Discord bot operates using slash commands, which are:
+This Discord bot is triggered with slash commands, these are:
 -   Defined in individual files under `src/commands/`. If you add new commands, follow the naming convention of the file name being the command's name. (ex: `/minibatch` -> `mini-batch.ts`)
 -   Registered with Discord in `src/register-commands.ts`.
 
@@ -64,7 +89,7 @@ If running locally, restart the bot after registering commands. You shouldn't ne
 ### Deploying Updates
 Railway automatically redeploys the bot when updates are pushed to the main branch, so you should not need to worry about manually registering new commands in production. However, if newly created or modified commands do not appear in Discord or do not function as expected, verify they have been properly registered.
 
-## Build the Season's Challenges (formerly "Competitions")
+# Build the Season's Challenges
 
 To prepare a mini challenge, use the interface below to define the object. This is currently the only way to add/update/delete challenges for the season. 
 
@@ -127,11 +152,11 @@ const  competitions:  Competition[] = [
 ]
 ```
 
-### A few things to note:
+## A few things to note
 
 All text that is to be displayed in a discord message, MAY be formatted using Markdown if you want. Include all of the styles in the strings and they will be rendered accordingly. Here is a helpful markdwon editor that I used: [boom, said markdown editor](https://stackedit.io/app#)
 
-**Instructions for formatting instructions:**
+**Formatting instructions:**
 
 The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
 
@@ -156,7 +181,7 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 **Prompt:** The `prompt` value will be displayed as an embeded block. This is good for any text block/s you want to stand out or that are over 2,000 characters (see Cyber security week 3 "Phind the Phish").
 
 
-## Using the Bot
+# Using the Bot
 
 Use one of the two slash commands `/start` or `/minibatch` followed by two arguments `{week #} {competition category}`, defining which of your predefined competitions you want to send.
 1. `/start` sends a challenge to the channel in which the command is run
@@ -164,10 +189,9 @@ Use one of the two slash commands `/start` or `/minibatch` followed by two argum
 
 ex: `/minibatch 1 Cybersecurity`
 
-## Collecting responses
+# Collecting responses
 
 ALL response by students with the mini comps will be captured and POSTed to the Bubble DB. Currently there is a Data Type named `MINI_COMP_BOT_RESPONSES`, it is updated from `/src/udpate-bubble.ts`. At the moment the data collected from the students is the following:
-
 
 ```
 {
