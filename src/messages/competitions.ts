@@ -13,15 +13,15 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       1,
       "cybersecurity",
-      "Decide if the password is **TRUSTworthy** or **SUSworthy**. In other words, would you trust this password to protect your data or Nah?"
+      "Is this password **TRUSTworthy** or **SUSworthy**?🕵️"
     ),
     prompt: `**Password:** 2MuchFun!`,
     inputType: "button",
     options: ["Trust", "Sus"],
     correctAnswer: ["Sus"],
-    onSuccessMessage: "🎉 You got it! `2MuchFun`! is a SUS-worthy password! ", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
+    onSuccessMessage: "🎉 You got it! `2MuchFun`! is a SUS-worthy password! ",
     onWrongMessage:
-      "❌ Oops! `2MuchFun` isn't strong enough! It's actually pretty sus tbh.", // If you want to test your password evaluation skills some more, try sending this command to the chat: /sus-or-trust",
+      "❌ Oops! `2MuchFun` isn't strong enough! It's actually pretty sus tbh.",
   },
   {
     slug: "minis_cc_wk01_01",
@@ -31,7 +31,7 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       1,
       "contentCreation",
-      "Create an ad for Stiegler EdTech's latest product: **NoCrastination**. This product is on a tear, helping students stop procrastinating. We need to launch an ad that will stirr up some buzz. How better to do that than with a mysterious ad!? The best ad will be posted on the NØTWØRK!\n\u200B\nIdeate a sentence or two that will could be posted as an advertiement. However, the finalized ad must be written ENTIRELY in emojis. Consider writing out your ad in words first and then using emojis to capture the sentiment of each phrase!"
+      `Our latest product, **"NoCrastination”** helps students stop procrastinating. Help us create a Slogan using **ONLY Emojis**! The best slogan will be featured on **The NØTWØRK**!\n\n\u200B\nIf you're on a computer, click the "Answer Button" and then do one of the following to select your emojis:\n1. \`Mac\`: ctrl + cmd + space bar\n2.\`Windows\`windows + period (.)`
     ),
     inputType: "text",
   },
@@ -43,7 +43,7 @@ export const competitions: Competition[] = [
     instructions: formatCompInstructions(
       1,
       "dataScience",
-      "Observe the progression on the graph. See if you can guess what is being represented here, select the option you think is best!"
+      "🐈 **What does this Graph Represent?** 🐶"
     ),
 
     image:
@@ -53,7 +53,7 @@ export const competitions: Competition[] = [
     options: [
       "How long each pet likes to hang out with you",
       "How long people like to hang out with each pet",
-      "How much each pet misses you based on how long you're away",
+      "How much the pet misses you while you're away",
       "Level of overall chillness",
     ],
     correctAnswer: [
@@ -111,14 +111,12 @@ export const competitions: Competition[] = [
     prompt: ``,
     inputType: "dropdown",
     options: [
-      "Time spent finding something to watch vs.\nactually watching something",
+      "Finding something to watch vs. watching it",
       "Amount of sugar in a Pixy Stix vs protein",
       "Ratio or People to Penguins in Alaska",
       "Ratio of people who prefer dogs to cats",
     ],
-    correctAnswer: [
-      "Time spent looking for something to watch vs. actually watching something",
-    ],
+    correctAnswer: ["Finding something to watch vs. watching it"],
   },
   // WEEK 3
   {

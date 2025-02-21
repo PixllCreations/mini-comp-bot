@@ -32,6 +32,7 @@ function createCompetitionMessage(competition: Competition) {
         .setPlaceholder("Select an answer")
         .addOptions(
           competition.options.map((option) => ({
+            // label: "_",
             label: option,
             value: option,
           }))
