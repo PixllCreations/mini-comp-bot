@@ -135,9 +135,7 @@ All text that is to be displayed in a discord message, MAY be formatted using Ma
 
 The function `formatCompInstructions(...//)` is used to ensure consistent formatting of all mini comp headers. You do not have to use this but unless you want to create a specific header, make the modifications inside the aforementioned function directly, since that will be applied to all header from then on out.
 
-**Success/Failure messages**
-
-The `copmetition.on_____Message:` keys are optional. There are currently two default messages that the bot will send if you do not include a custom response (`src/messages/bot-response.ts`):
+**Success/Failure messages:** The `copmetition.on_____Message:` keys are optional. There are currently two default messages that the bot will send if you do not include a custom response (`src/messages/bot-response.ts`):
 
 > onSuccessMessage: "✅ Nice work, you're crushing it! 🎉"
 > 
@@ -149,23 +147,22 @@ The `Competition.options:` MUST be included if you choose either `button` or `dr
 > 
 > "dropdown" requires AT LEAST ONE option
 
-**Input Type:**
-The `inputType` decides the type of response the user is asked to use. `Buttons` and `Dropdown` REQUIRE `options` since the students may only select from what is provided. `Text` and `Image` are open to how the student wants to respond.
+**Input Type:** The `inputType` decides the type of response the user is asked to use. `Buttons` and `Dropdown` REQUIRE `options` since the students may only select from what is provided. `Text` and `Image` are open to how the student wants to respond.
 
-**Correct Answer:**
-If your mini challenge has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
+**Correct Answer:** If your mini challenge has a correct answer, make sure to include the `correctAnswer` key in your competition object. This is what the student's asnwers will be compared against.
+
+**Image:** The `image` value will be displayed with the instructions. You can see this implemented in the first two weeks of Data Science challenges: I send a graph along with the instructions.
+
+**Prompt:** The `prompt` value will be displayed as an embeded block. This is good for any text block/s you want to stand out or that are over 2,000 characters (see Cyber security week 3 "Phind the Phish").
+
 
 ## Using the Bot
 
-To use the bot you will send the following command in the channel you wish to send the mini comp to (a single command to send to multiple channels is coming soon). Run the following command:
+Use one of the two slash commands `/start` or `/minibatch` followed by two arguments `{week #} {competition category}`, defining which of your predefined competitions you want to send.
+1. `/start` sends a challenge to the channel in which the command is run
+2. `/minibatch` sends a challenge to each of the predefined channels
 
-    /start {week #} {competition type}
-
-> {week #} = Competition.week
->
-> {competition type} = Competition.category
-
-example: `/minibatch 1 Cybersecurity`
+ex: `/minibatch 1 Cybersecurity`
 
 ## Collecting responses
 
@@ -183,5 +180,4 @@ ALL response by students with the mini comps will be captured and POSTed to the 
   text_response // if student responds using buttons, text input, dropdown
   image_response // if the student responds with an image
 }
-
 ```
