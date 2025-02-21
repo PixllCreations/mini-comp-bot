@@ -13,6 +13,7 @@ import type { ButtonInteraction, Message, ReadonlyCollection } from "discord.js"
 import { competitions } from "../messages/competitions"
 import { createModal } from "../utils/handlers"
 import updateBubble from "../utils/update-bubble"
+import { onChallengeComplete } from "../messages/bot-response"
 
 function getCompetitionFromButton(customId: string, prefix: string) {
   const competitionName = customId.replace(prefix, "")
@@ -212,10 +213,7 @@ export default async function onButtonInteraction(
     })
 
     await interaction.reply({
-      content: isCorrect
-        ? competition.onSuccessMessage || "✅ Correct answer! 🎉"
-        : competition.onWrongMessage ||
-          `❌ Incorrect answer. The correct answer was: **${competition.correctAnswer}**.`,
+      content: onChallengeComplete(competition, isCorrect),
       flags: [MessageFlags.Ephemeral],
     })
 

@@ -8,6 +8,7 @@ import {
 import type { ModalSubmitInteraction } from "discord.js"
 import { competitions } from "../messages/competitions"
 import updateBubble from "../utils/update-bubble"
+import { onChallengeComplete } from "../messages/bot-response"
 
 export default async function onModalSubmitInteraction(
   interaction: ModalSubmitInteraction
@@ -30,10 +31,7 @@ export default async function onModalSubmitInteraction(
       : competition.correctAnswer === response.trim()
 
     await interaction.reply({
-      content: isCorrect
-        ? competition.onSuccessMessage || "✅ Correct answer! 🎉"
-        : competition.onWrongMessage ||
-          `❌ Incorrect answer. The correct answer was: **${competition.correctAnswer}**.`,
+      content: onChallengeComplete(competition, isCorrect),
       flags: [MessageFlags.Ephemeral],
     })
   } else {

@@ -1,7 +1,11 @@
-import type { CompHeadings, ResponseType } from "../interfaces"
-
-// ----------------------------------------------------------------------------------------------------------------------------------
-// Default success and failure messages when students answer
+import {
+  ButtonInteraction,
+  MessageFlags,
+  ModalSubmitInteraction,
+  StringSelectMenuInteraction,
+  type CommandInteraction,
+} from "discord.js"
+import type { Competition, CompHeadings, ResponseType } from "../interfaces"
 
 function defaultBotResponse(
   response: keyof ResponseType,
@@ -14,9 +18,6 @@ function defaultBotResponse(
 
   return defaultResponse[response]
 }
-
-// ----------------------------------------------------------------------------------------------------------------------------------
-// Success message sent to admin after mini challenge launch
 
 function adminLaunchResponse(
   week: number,
@@ -41,9 +42,6 @@ function adminLaunchResponse(
   }\nMini Challenge [Week ${week}] :rocket:launched in **${numChannels}** channels`
 }
 
-// ----------------------------------------------------------------------------------------------------------------------------------
-// Initial message sent to students to introduce and explain the mini comp
-
 const compHeadings: CompHeadings = {
   cybersecurity: "Cybersecurity 💻🔐👾",
   digitalMarketing: "Digital Marketing :selfie:🎆📢",
@@ -58,4 +56,16 @@ function formatCompInstructions(
   return `# [🏆Mini Challenges: Week ${week}] ${compHeadings[category]}\n\u200B\n${instructions}`
 }
 
-export { adminLaunchResponse, defaultBotResponse, formatCompInstructions }
+function onChallengeComplete(competition: Competition, isCorrect: boolean) {
+  return isCorrect
+    ? competition.onSuccessMessage || defaultBotResponse("onSuccessMessage")
+    : competition.onWrongMessage ||
+        defaultBotResponse("onWrongMessage", competition.correctAnswer)
+}
+
+export {
+  adminLaunchResponse,
+  defaultBotResponse,
+  formatCompInstructions,
+  onChallengeComplete,
+}
